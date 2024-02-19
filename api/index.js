@@ -3,13 +3,14 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const { authRoute } = require('./route/auth.route');
 dotenv.config();
-
 
 const PORT = 3000;
 
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect(process.env.MONGO_DB)
 .then(() => {

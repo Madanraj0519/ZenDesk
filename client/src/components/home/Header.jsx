@@ -45,7 +45,9 @@ const Header = () => {
             <ul className='flex text-base font-medium font-poppins gap-10 items-center cursor-pointer'>
               {
                 links.map(({id, link}) => (
-                    <li className='hover:scale-105 duration-200 hidden md:block'>{link}</li>
+                    <ul key={id}>
+                      <li className='hover:scale-105 duration-200 hidden md:block'>{link}</li>
+                    </ul>
                 ))
               }        
             </ul>

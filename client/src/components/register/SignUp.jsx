@@ -3,16 +3,17 @@ import {BsEyeSlash, BsEye} from "react-icons/bs";
 import { IoIosInformationCircle } from "react-icons/io";
 import { PiArrowElbowDownLeftBold } from "react-icons/pi";
 import {signInStart, signInSuccess, signInFailure} from "../../redux/auth/userSlice"
-import { current } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const SignUp = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { currentUser, loading, error} = useSelector((state) => state.user)
 
     console.log(currentUser);
-    
+
     const [formData, setFormData] = useState({});
     // These are the animation part for the sign up form
     const [progress, setProgress] = useState(14.2);
@@ -30,11 +31,28 @@ const SignUp = () => {
       setFormData({...formData, [e.target.id] : e.target.value});
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
       e.preventDefault();
-      dispatch(signInSuccess(formData));
-
+      try{
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+        const data = await res.json();
+        // console.log(data);
+  
+        if(data.success === true) {
+          navigate('/email-verification');
+        }
+      }catch(err){
+        console.log(err);
+      }
     }
+
+
     const handleStepOne = (value) => {
         setStepOne(!stepOne);
         setStepTwo(!stepTwo);
@@ -100,7 +118,7 @@ const SignUp = () => {
             </div>
             <h1 className='text-xl pt-7 font-medium font-poppins text-emerald-900'>Start your free Zendesk trial</h1>
 
-         
+          <form onSubmit={handleSubmit}>
             {/* step : 1 */}
            { stepOne &&
             <>
@@ -253,7 +271,7 @@ const SignUp = () => {
              <div className='text-center w-full mt-4'>
                <div className='flex gap-5'>
                  <button className='text-emerald-900 w-full p-2 font-medium text-xl border-2 border-emerald-900' onClick={() => handleStepSix(false)}>Back</button>
-                 <button className='bg-emerald-900 w-full p-2 font-medium text-xl text-white' onClick={handleSubmit}>Complete the trail Signup</button>
+                 <button className='bg-emerald-900 w-full p-2 font-medium text-xl text-white' type='submit'>Complete the trail Signup</button>
                </div>
               <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter<PiArrowElbowDownLeftBold /></span></p>
             </div>
@@ -261,6 +279,7 @@ const SignUp = () => {
             </div>
          }
 
+        </form>
            <h1 className='text-sm font-poppins text-emerald-700 mt-5'>By submitting my personal data, I consent to Zendesk collecting, 
             processing, and storing my information in accordance with the <span className='underline cursor-pointer'>Zendesk Privacy Notice</span>.</h1>
           </div>
