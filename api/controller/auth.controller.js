@@ -1,6 +1,7 @@
 const userModel = require('../model/user.model');
 const bcrypt = require('bcryptjs');
 const errorHandler = require('../utils/errorHandler');
+const jwt = require('jsonwebtoken');
 
 
 const registerUser = async(req, res, next) => {
@@ -36,12 +37,14 @@ const loginUser = async (req, res, next) => {
         if(!validPassword){
             return next(errorHandler(401, 'Invalid credentials'));
         }
-        res.status(200).
-        json({
-            success : true,
-            message : 'User logged in successfully',
-            data : validUser
-        });
+        const token = jwt.sign({ id : validUser._id}, process.env.JWT_SECRET_KEY);
+         /* Just hidding the password from the client side for the security purpose*/
+        const {userPassword : hashPassword, ...restDetails} = validUser._doc;
+        const expiryDate = new Date(Date.now() + 3600000); // 1 hour
+        res.cookie('access_token', token, {httpOnly: true, expires : expiryDate}).
+        status(200).
+        json(restDetails);
+        
        }catch(err){
         next(err)
        }
