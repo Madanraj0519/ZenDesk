@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 import {BsEyeSlash, BsEye} from "react-icons/bs";
 import { IoIosInformationCircle } from "react-icons/io";
 import { PiArrowElbowDownLeftBold } from "react-icons/pi";
-
-
+import {signInStart, signInSuccess, signInFailure} from "../../redux/auth/userSlice"
+import { current } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SignUp = () => {
 
+    const dispatch = useDispatch();
+    const { currentUser, loading, error} = useSelector((state) => state.user)
+
+    console.log(currentUser);
+    
+    const [formData, setFormData] = useState({});
+    // These are the animation part for the sign up form
     const [progress, setProgress] = useState(14.2);
     const [stepCount, setStepCount] = useState(1);
     const [stepOne, setStepOne] = useState(true);
@@ -18,6 +26,15 @@ const SignUp = () => {
     const [stepSeven, setStepSeven] = useState(false);
 
 
+    const handleChange = (e) => {
+      setFormData({...formData, [e.target.id] : e.target.value});
+    }
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      dispatch(signInSuccess(formData));
+
+    }
     const handleStepOne = (value) => {
         setStepOne(!stepOne);
         setStepTwo(!stepTwo);
@@ -68,7 +85,6 @@ const SignUp = () => {
         }
     }
 
-
   return (
 
     <>
@@ -84,6 +100,7 @@ const SignUp = () => {
             </div>
             <h1 className='text-xl pt-7 font-medium font-poppins text-emerald-900'>Start your free Zendesk trial</h1>
 
+         
             {/* step : 1 */}
            { stepOne &&
             <>
@@ -92,6 +109,8 @@ const SignUp = () => {
                 <input
                 type="email"
                 placeholder="Enter your Mail"
+                id='userEmail'
+                onChange={handleChange}
                 className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
                  />
                  <div className='flex justify-between items-start gap-4 bg-gray-100 p-4' >
@@ -115,6 +134,8 @@ const SignUp = () => {
              <input
              type="text"
              placeholder="Enter your Name"
+             id='userName'
+             onChange={handleChange}
              className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
               />
              <div className='text-center w-full mt-4'>
@@ -135,6 +156,8 @@ const SignUp = () => {
              <input
              type="text"
              placeholder="Enter your phone number"
+             id='userPhone'
+             onChange={handleChange}
              className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
               />
              <div className='text-center w-full mt-4'>
@@ -155,6 +178,8 @@ const SignUp = () => {
              <input
              type="text"
              placeholder="Enter your job title"
+             id='userJob'
+             onChange={handleChange}
              className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
               />
              <div className='text-center w-full mt-4'>
@@ -176,6 +201,8 @@ const SignUp = () => {
              <input
              type="text"
              placeholder="Enter your company name"
+             id='userCompany'
+             onChange={handleChange}
              className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
               />
              <div className='text-center w-full mt-4'>
@@ -196,6 +223,8 @@ const SignUp = () => {
              <input
              type="text"
              placeholder="Enter your company details"
+             id='userEmployees'
+             onChange={handleChange}
              className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
               />
              <div className='text-center w-full mt-4'>
@@ -217,12 +246,14 @@ const SignUp = () => {
              <input
              type="password"
              placeholder="Create a password"
+             id='userPassword'
+             onChange={handleChange}
              className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
               />
              <div className='text-center w-full mt-4'>
                <div className='flex gap-5'>
                  <button className='text-emerald-900 w-full p-2 font-medium text-xl border-2 border-emerald-900' onClick={() => handleStepSix(false)}>Back</button>
-                 <button className='bg-emerald-900 w-full p-2 font-medium text-xl text-white'>Complete the trail Signup</button>
+                 <button className='bg-emerald-900 w-full p-2 font-medium text-xl text-white' onClick={handleSubmit}>Complete the trail Signup</button>
                </div>
               <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter<PiArrowElbowDownLeftBold /></span></p>
             </div>
