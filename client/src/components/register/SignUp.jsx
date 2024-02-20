@@ -43,10 +43,13 @@ const SignUp = () => {
         });
         const data = await res.json();
         // console.log(data);
-  
-        if(data.success === true) {
-          navigate('/email-verification');
+        if(data.success === false) {
+          dispatch(signInFailure(data.message));
         }
+        
+        localStorage.setItem("User", JSON.stringify(data));
+        dispatch(signInSuccess(data));
+        navigate(`/email-verification`);
       }catch(err){
         console.log(err);
       }

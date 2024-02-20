@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login'
+import VerifyEmail from './pages/VerifyEmail';
 
 // components
 import EmailVerify from './components/register/EmailVerify';
@@ -17,6 +18,10 @@ const App = () => {
          <Route path='/' element={<Home />} />
          <Route path='/register' element={<Register />} />
          <Route path='/login' element={<Login />} />
+         <Route path='/verify-email' element={<VerifyEmail />} />
+
+
+
          <Route path='/email-verification' element={<EmailVerify />} />
        </Routes>
     </BrowserRouter>

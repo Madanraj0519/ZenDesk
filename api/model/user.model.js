@@ -2,35 +2,40 @@ const { default: mongoose } = require("mongoose");
 
 const userModel = new mongoose.Schema({
     userEmail : {
-        type : 'string',
+        type : String,
         required : true,
         unique : true
     },
     userName : {
-        type : 'string',
+        type : String,
         required : true,
     },
     userPhone : {
-        type : 'string',
+        type : String,
         required : true,
         unique : true
     },
     userJob : {
-        type : 'string',
+        type : String,
         required : true,
     },
     userCompany : {
-        type : 'string',
+        type : String,
         required : true,
     },
     userEmployees : {
-        type : 'string',
+        type : String,
         required : true,
     },
     userPassword : {
-        type : 'string',
+        type : String,
         required : true,
     },
+    isVerified : {
+        type : Boolean,
+        default : false
+    },
+    emailToken : { type : String}
 }, { timestamps : true });
 
 

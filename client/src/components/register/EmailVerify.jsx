@@ -3,7 +3,6 @@ import gmail from "../../images/gmail.png";
 import hotmail from "../../images/hotmail.png";
 import yahoo from "../../images/yahoo.png";
 import cloud from "../../images/cloud.png";
-import axios from 'axios'
 // import {signInStart, signInSuccess, signInFailure} from "../../redux/auth/userSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
