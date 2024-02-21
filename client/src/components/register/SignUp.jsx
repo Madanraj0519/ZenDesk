@@ -46,10 +46,10 @@ const SignUp = () => {
         if(data.success === false) {
           dispatch(signInFailure(data.message));
         }
-        
+
         localStorage.setItem("User", JSON.stringify(data));
         dispatch(signInSuccess(data));
-        navigate(`/email-verification`);
+        navigate('/verify-email');
       }catch(err){
         console.log(err);
       }
