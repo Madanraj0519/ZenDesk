@@ -59,6 +59,16 @@ const Profile = () => {
     }
   }
 
+  const handleSignOut = async() => {
+    try{
+      await fetch('/api/auth/signout');
+      localStorage.removeItem('token');
+      dispatch(signOut());
+    }catch(err){
+      console.log(err);
+    }
+  };
+
 
 
   return (
@@ -220,7 +230,7 @@ const Profile = () => {
       </form>
       <div>
         <button onClick={handleDeleteAccount} className='cursor-pointer'>Delete account</button>
-        <h1>Sign out</h1>
+        <button onClick={handleSignOut} className='cursor-pointer'>Sign out</button>
       </div>
     </div>
   </div>

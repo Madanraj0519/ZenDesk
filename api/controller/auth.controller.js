@@ -29,6 +29,11 @@ const registerUser = async(req, res, next) => {
                 await user.save();
                 sendEmail(user);
                 const token = createToken(user._id);
+
+                // Set cookie with expiration in 15 days
+                 const expirationDate = new Date(Date.now() + 15 * 24 * 3600 * 1000);
+                 res.cookie('token', token, { httpOnly: true, expires: expirationDate });
+
                  res.status(200).
                  json({
                     success : true,
@@ -57,6 +62,10 @@ const loginUser = async (req, res, next) => {
         }
         const {userPassword : hashPassword, ...restDetails} = validUser._doc;
         const token = createToken(validUser._id);
+
+         // Set cookie with expiration in 15 days
+        const expirationDate = new Date(Date.now() + 15 * 24 * 3600 * 1000);
+        res.cookie('token', token, { httpOnly: true, expires: expirationDate });
 
         res.status(200)
         .json({
@@ -107,8 +116,18 @@ const verifyEmail = async(req, res, next) => {
     }
 };
 
+const signOut = (req, res, next) => {
+    res.clearCookie('access_token')
+    .status(200)
+    .json({
+        success: true,
+        message: 'Sign out successfully',
+    })
+};
+
 module.exports = {
     registerUser,
     loginUser,
     verifyEmail,
+    signOut,
 }
