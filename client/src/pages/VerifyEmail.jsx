@@ -22,7 +22,7 @@ const VerifyEmail = () => {
     ( async () => {
       if(currentUser?.isVerified) {
         setTimeout(() => {
-          return navigate('/');
+          return navigate('/login');
         }, 3000);
       }else{
         if(emailToken){

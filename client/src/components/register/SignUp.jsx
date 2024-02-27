@@ -10,7 +10,7 @@ const SignUp = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { currentUser, loading, error} = useSelector((state) => state.user)
+    const { currentUser, loading, error} = useSelector((state) => state.user);
 
     console.log(currentUser);
 
@@ -42,7 +42,7 @@ const SignUp = () => {
           body: JSON.stringify(formData)
         });
         const data = await res.json();
-        // console.log(data);
+        console.log(data);
         if(data.success === false) {
           dispatch(signInFailure(data.message));
         }

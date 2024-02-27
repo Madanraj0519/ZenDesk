@@ -28,12 +28,12 @@ const updateUser = async(req, res, next) => {
             },
             {new : true},
         );
-        const {userPassword, ...rest} = updateUser._doc;
+        const {userPassword, ...restDetails} = updateUser._doc;
         res.status(200)
         .json({
             success : true,
             message : "User updated successfully",
-            data : rest
+            restDetails
         });
     }catch(err){
         next(err);

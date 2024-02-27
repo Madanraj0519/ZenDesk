@@ -27,7 +27,6 @@ const registerUser = async(req, res, next) => {
                     emailToken : crypto.randomBytes(16).toString('hex'),
                 });
                 await user.save();
-                // sendVerificationMail(user);
                 sendEmail(user);
                 const token = createToken(user._id);
                  res.status(200).
