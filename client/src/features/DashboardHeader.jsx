@@ -10,7 +10,7 @@ function DashboardHeader({ showSidebar, handleToggleSidebar }) {
   const dispatch = useDispatch();
 
   return (
-    <header className="flex justify-between items-center px-4 py-2  bg-green-400  h-16">
+    <header className="flex justify-between items-center px-4 py-2  bg-green-800  h-16">
       <div className="flex items-center">
       <div className="cursor-pointer mr-4 md:hidden" onClick={handleToggleSidebar}>
           {!showSidebar ? (

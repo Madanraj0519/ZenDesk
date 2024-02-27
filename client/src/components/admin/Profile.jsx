@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import {useDispatch, useSelector} from "react-redux"
-import {updateUserStart, updateUserSuccess, updateUserFailure} from "../../redux/auth/userSlice";
-
+import {useDispatch, useSelector,} from "react-redux"
+import {updateUserStart, updateUserSuccess, updateUserFailure,
+        deleteUserStart, deleteUserSuccess, deleteUserFailure,
+        signOut} from "../../redux/auth/userSlice";
+import {Navigate, useNavigate} from "react-router-dom"
 const Profile = () => {
  
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const { currentUser, loading, error} = useSelector((state) => state.user);
 
@@ -38,11 +41,29 @@ const Profile = () => {
     console.log(currentUser);
   };
 
+  const handleDeleteAccount = async() => {
+    try{
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser.restDetails._id}`, {
+        method : 'DELETE',
+      });
+      const data = await res.json();
+      if(data.success === false){
+        dispatch(deleteUserFailure());
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+      navigate('/register');
+    }catch(err){
+      dispatch(deleteUserFailure(err));
+    }
+  }
+
 
 
   return (
     <div className="flex flex-col justify-center items-center h-full mt-20">
-    <div className="flex justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
         className="bg-slate-800 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 max-h-full"
@@ -190,13 +211,17 @@ const Profile = () => {
         {/* <!-- Submit button --> */}
         <div className="flex justify-center items-center">
           <button
-            className="bg-green-500 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-400 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
+            className="bg-green-800 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Update
           </button>
         </div>
       </form>
+      <div>
+        <button onClick={handleDeleteAccount} className='cursor-pointer'>Delete account</button>
+        <h1>Sign out</h1>
+      </div>
     </div>
   </div>
   )

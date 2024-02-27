@@ -40,6 +40,20 @@ const updateUser = async(req, res, next) => {
     }
 };
 
+
+const deleteUser = async(req, res, next) => {
+    try{
+        await userModel.findByIdAndDelete(req.params.id);
+        res.status(200).
+        json({
+            success : true,
+            message : "Your account has been deleted successfully",
+        })
+    }catch(err){
+        next(err);
+    };
+};
 module.exports = {
     updateUser,
+    deleteUser,
 }
