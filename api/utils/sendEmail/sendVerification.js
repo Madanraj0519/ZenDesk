@@ -1,29 +1,35 @@
-const nodemailer = require('nodemailer');
-const {createMailTransporter} = require('./createMailTransporter');
+const nodemailer = require("nodemailer");
+const smtpTransport = require('nodemailer-smtp-transport');
+require('dotenv').config();
 
-const sendVerificationMail = (user) => {
+function sendEmail(user){
     nodemailer.createTestAccount((err, account) => {
-        
-    const transporter = createMailTransporter();
-
-    const mailOptions = {
-        from : "User Verification <madan__raj@outlook.com>",
-        to : "madanswetha10@gmail.com",
-        subject : "Verify your email...",
-        html : `
-        <p>Hello 🙋‍♂️ ${user.userName}, verify your email by clicking this link...</p>
-        <a href='http://localhost:5173/verify-email?emailToken=${user.emailToken}'>Verify Your Email</a>
-        `,
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-        }else{
-            console.log('Verification email sent successfully');
-        }
+        var transporter = nodemailer.createTransport(smtpTransport({
+           service:"gmail",
+            auth: {
+                user: "madanswetha10@gmail.com",       // Sender mail id
+                pass: "npvtzeoazvypjdtm"                 // Sender password
+            }
+            }));
+        let mailOptions = {
+            from: `Fred Foo 👻" <madanswetha10@gmail.com>`,        // Sender mail id
+            to: user.userEmail,                // Reciever mail id (For multiple recievers to:'abc@gmail.com,xyz@gmail.com')
+            subject : "Verify your email...",
+            html : `
+                 <p>Hello 🙋‍♂️ ${user.userName}, verify your email by clicking this link...</p>
+                 <a href='http://localhost:5173/verify-email?emailToken=${user.emailToken}'>Verify Your Email</a>
+                `, 
+        };
+  
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log('Error', error);
+            }
+            else{
+                console.log('Success', info);
+            }
+        });
     });
-    })
-};
+  }
 
-module.exports = { sendVerificationMail };
+module.exports = {sendEmail};

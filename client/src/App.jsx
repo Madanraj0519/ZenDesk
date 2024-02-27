@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login'
 import VerifyEmail from './pages/VerifyEmail';
+import Dashboard from './pages/Dashboard';
 
 // components
 import EmailVerify from './components/register/EmailVerify';
@@ -19,6 +20,7 @@ const App = () => {
          <Route path='/register' element={<Register />} />
          <Route path='/login' element={<Login />} />
          <Route path='/verify-email' element={<VerifyEmail />} />
+         <Route path='/dashboard' element={<Dashboard />} />
 
 
 

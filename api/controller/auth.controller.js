@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const errorHandler = require('../utils/errorHandler');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const { sendVerificationMail } = require('../utils/sendEmail/sendVerification');
+const { sendEmail } = require('../utils/sendEmail/sendVerification');
 
 
 const createToken = (_id) => {
@@ -27,7 +27,8 @@ const registerUser = async(req, res, next) => {
                     emailToken : crypto.randomBytes(16).toString('hex'),
                 });
                 await user.save();
-                sendVerificationMail(user);
+                // sendVerificationMail(user);
+                sendEmail(user);
                 const token = createToken(user._id);
                  res.status(200).
                  json({
@@ -87,7 +88,6 @@ const verifyEmail = async(req, res, next) => {
             user.emailToken = null;
             
             await user.save();
-
             const token = createToken(user._id);
 
             res.status(200).json({

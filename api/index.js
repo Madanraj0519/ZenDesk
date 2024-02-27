@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const { authRoute } = require('./route/auth.route');
+const nodemailer = require('nodemailer');
 dotenv.config();
 
 const PORT = 3000;
