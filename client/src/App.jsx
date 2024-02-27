@@ -7,9 +7,11 @@ import Register from './pages/Register';
 import Login from './pages/Login'
 import VerifyEmail from './pages/VerifyEmail';
 import Dashboard from './pages/Dashboard';
+import AdminBoard from './pages/AdminBoard';
 
 // components
 import EmailVerify from './components/register/EmailVerify';
+import AdminProfile from './pages/AdminProfile';
 
 
 const App = () => {
@@ -20,8 +22,8 @@ const App = () => {
          <Route path='/register' element={<Register />} />
          <Route path='/login' element={<Login />} />
          <Route path='/verify-email' element={<VerifyEmail />} />
-         <Route path='/dashboard' element={<Dashboard />} />
-
+         <Route path='/dashboard/admin' element={<AdminBoard />} />
+         <Route path='/dashboard/admin/profile' element={<AdminProfile />} />
 
 
          <Route path='/email-verification' element={<EmailVerify />} />
