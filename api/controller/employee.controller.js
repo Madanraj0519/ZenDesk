@@ -11,6 +11,22 @@ const createToken = (_id) => {
     return jwt.sign({_id}, jwtSecretKey);
 }
 
+
+const getEmployee = async(req, res, next) => {
+    try{
+        let employee = await employeeModel.find();
+
+        res.status(200).json({
+            success:false,
+            message : "Employee has been fetched successfully",
+            employees : employee
+        });
+
+    }catch(err){
+        next(err);
+    }
+};
+
 const createEmployee = async(req, res, next) => {
     const { employeeEmail, employeeName, employeePhone, employeePassword, employeeRole } = req.body;
             try{
@@ -95,6 +111,7 @@ const deleteEmployee = async(req, res, next) => {
 };
 
 module.exports = {
+    getEmployee,
     createEmployee,
     updateEmployee,
     deleteEmployee,

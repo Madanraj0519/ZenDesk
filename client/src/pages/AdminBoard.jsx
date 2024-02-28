@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DashboardHeader from "../features/DashboardHeader";
 import DashboardSidebar from "../features/DashboardSidebar";
-import AddUser from "../components/admin/AddUser";
+import EmployeeList from "../components/admin/EmployeeList";
 
 function AdminBoard() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -37,9 +37,9 @@ function AdminBoard() {
       }
       onClick={handleCloseSidebar}
     ></div>
-    <div className={showSidebar ? "filter blur-sm" : ""}>
-      <div className="flex flex-col justify-center items-center w-full">
-        <AddUser />
+    <div className={showSidebar ? "" : ""}>
+      <div className="flex flex-col justify-center items-center bg-slate-200  w-full">
+        <EmployeeList />
       </div>
     </div>
   </div>

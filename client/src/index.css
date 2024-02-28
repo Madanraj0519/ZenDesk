@@ -7,6 +7,10 @@
     background:#fff7ed;
 } */
 
+*{
+  font-family: 'Times New Roman', Times, serif;
+  text-transform: capitalize;
+}
 
 .bg-color{
     background: #000000ba;
@@ -30,3 +34,62 @@
     background-color: #a1a1aa;
     transition: width 0.5s ease-out;
 }
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+  margin-top: 5px;
+}
+
+th {
+  color: white;
+}
+
+th,
+td {
+  width: 150px;
+  text-align: center;
+  border: 0px solid black;
+  padding: 5px;
+  border-left:0; 
+  border-right:0; 
+  border-top:0; 
+  border-bottom:0;
+}
+  
+  /*PAGINATION*/
+  .paginationContainer {
+    display: flex;
+    justify-content: end;
+    gap: 3px;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .paginationContainer li {
+    list-style: none;
+    padding: 10px;
+    border: 0px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 300;
+    color: black;
+  }
+  
+  .paginationContainer li:hover {
+    background-color: #ddd;
+  }
+  
+  .paginationContainer li.activePagination {
+    background-color: #1e293b;
+    color: white;
+  }
+  
+  .activePagination:hover {
+    background-color: #1e293b;
+    color: white;
+  }
+  
+  .activePagination a {
+    color: white;
+  }

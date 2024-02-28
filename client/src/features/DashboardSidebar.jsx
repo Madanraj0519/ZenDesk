@@ -30,7 +30,7 @@ function DashboardSidebar() {
     },
     {
       Name: "Fees Details",
-      links: "/admin/fees-details",
+      links: "/dashboard/admin",
       child: (
         <>
           <GiMoneyStack />

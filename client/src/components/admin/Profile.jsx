@@ -18,7 +18,7 @@ const Profile = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const user = await currentUser;
-    console.log(user.restDetails);
+    // console.log(user.restDetails);
     try{
       dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser.restDetails._id}`, {
@@ -33,12 +33,12 @@ const Profile = () => {
         dispatch(updateUserFailure(data));
       }
       dispatch(updateUserSuccess(data));
-      console.log(data);
+      // console.log(data);
     }catch(e){
       dispatch(updateUserFailure(e));
     };
 
-    console.log(currentUser);
+    // console.log(currentUser);
   };
 
   const handleDeleteAccount = async() => {
@@ -72,7 +72,7 @@ const Profile = () => {
 
 
   return (
-    <div className="flex flex-col justify-center items-center h-full mt-20">
+    <div className="flex flex-col justify-center items-center h-screen mt-20">
     <div className="flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
