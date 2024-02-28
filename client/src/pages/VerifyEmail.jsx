@@ -3,6 +3,8 @@ import {useSearchParams} from "react-router-dom"
 import {signInStart, signInSuccess, signInFailure} from "../redux/auth/userSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const VerifyEmail = () => {
@@ -41,10 +43,12 @@ const VerifyEmail = () => {
 
           if(data.success === false){
             dispatch(signInFailure(data.message));
+            toast.error(data.message);
           }
 
           // localStorage.setItem("User", JSON.stringify(data));
           dispatch(signInSuccess(data));
+          toast.success(data.message);
         }
       }
     })();

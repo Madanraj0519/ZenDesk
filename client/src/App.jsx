@@ -1,5 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // Pages
 import Home from './pages/Home';
@@ -12,7 +14,7 @@ import AdminProfile from './pages/AdminProfile';
 
 // components
 import AdminPrivateRoute from './features/AdminPrivateRoute';
-import EmailVerify from './components/register/EmailVerify';
+
 
 
 
@@ -29,9 +31,20 @@ const App = () => {
             <Route path='/dashboard/admin' element={<AdminBoard />} />
             <Route path='/dashboard/admin/profile' element={<AdminProfile />} />
          </Route>
-
-         {/* <Route path='/email-verification' element={<EmailVerify />} /> */}
        </Routes>
+       <ToastContainer
+          position="top-right"
+          autoClose={5000}
+           hideProgressBar={false}
+           newestOnTop={false}
+           closeOnClick
+           rtl={false}
+           pauseOnFocusLoss
+           draggable
+           pauseOnHover
+           theme="colored"
+           transition: Bounce />
+           
     </BrowserRouter>
   )
 }

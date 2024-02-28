@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { useNavigate } from 'react-router';
 import EditEmployee from './EditEmployee';
 import AddEmployee from './AddEmployee';
 import { MdEditSquare } from "react-icons/md";
@@ -8,7 +7,6 @@ import { MdEditSquare } from "react-icons/md";
 const EmployeeList = () => {
 
   const itemsPerPage = 6;
-  const navigate = useNavigate();
   const [employeeData, setEmployeeData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [isShow, setIsShow] = useState(false);

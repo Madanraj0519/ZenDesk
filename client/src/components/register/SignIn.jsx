@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import { signInStart, signInSuccess, signInFailure } from '../../redux/auth/userSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -27,15 +29,18 @@ const SignIn = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       if(data.success === false){
         dispatch(signInFailure(data));
+        toast.error(data.message);
       }else{
         navigate('/dashboard/admin');
         dispatch(signInSuccess(data));
+        toast.success(data.message);
       }
     }catch(e){
       dispatch(signInFailure(error));
+      toast.error("Something went wrong");
     }
   };
 

@@ -5,6 +5,8 @@ import { PiArrowElbowDownLeftBold } from "react-icons/pi";
 import {signInStart, signInSuccess, signInFailure} from "../../redux/auth/userSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
 
@@ -42,16 +44,20 @@ const SignUp = () => {
           body: JSON.stringify(formData)
         });
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         if(data.success === false) {
           dispatch(signInFailure(data.message));
+          toast.error(data.message);
         }
 
         // localStorage.setItem("User", JSON.stringify(data));
         dispatch(signInSuccess(data));
         navigate('/verify-email');
+        toast.info(data.message);
+
       }catch(err){
         console.log(err);
+        toast.error("Something went wrong");
       }
     }
 

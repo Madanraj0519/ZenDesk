@@ -4,6 +4,10 @@ import {updateUserStart, updateUserSuccess, updateUserFailure,
         deleteUserStart, deleteUserSuccess, deleteUserFailure,
         signOut} from "../../redux/auth/userSlice";
 import {Navigate, useNavigate} from "react-router-dom"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const Profile = () => {
  
   const dispatch = useDispatch();
@@ -31,11 +35,13 @@ const Profile = () => {
       const data = await res.json();
       if(data.success === false) {
         dispatch(updateUserFailure(data));
+        toastr.error(data.message);
       }
       dispatch(updateUserSuccess(data));
-      // console.log(data);
+      toastr.success(data.message);
     }catch(e){
       dispatch(updateUserFailure(e));
+      toast.error("Something went wrong");
     };
 
     // console.log(currentUser);
@@ -50,20 +56,24 @@ const Profile = () => {
       const data = await res.json();
       if(data.success === false){
         dispatch(deleteUserFailure());
+        toast.error(data.message);
         return;
       }
       dispatch(deleteUserSuccess(data));
       navigate('/register');
+      toast.error(data.message);
     }catch(err){
       dispatch(deleteUserFailure(err));
+      toast.error("Something went wrong");
     }
   }
 
   const handleSignOut = async() => {
     try{
       await fetch('/api/auth/signout');
-      localStorage.removeItem('token');
+      // localStorage.removeItem('token');
       dispatch(signOut());
+      toast.warning("Singed out")
     }catch(err){
       console.log(err);
     }

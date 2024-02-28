@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditEmployee = ({setShowUpdate, defaultData}) => {
 
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-
   const handleChange = (e) => {
     setFormData({
       ...defaultData,
@@ -23,11 +26,12 @@ const EditEmployee = ({setShowUpdate, defaultData}) => {
       });
       const data = await res.json();
       if(data.success === false) {
-       console.log(data.message);
+       toast.error(data.message);
       }
-      console.log(data.message);
+      toast.success(data.message);
+      setShowUpdate(false)
     }catch(e){
-      console.log(e.message);
+      toast.error("Something went wrong");
     };
   };
 
@@ -38,12 +42,12 @@ const EditEmployee = ({setShowUpdate, defaultData}) => {
       });
       const data = await res.json();
       if(data.success === false){
-        console.log(data.message);
+        toast.error(data.message);
       }
-      console.log(data.message);
-      window.location.reload();
+      toast.warning(data.message);
+      setShowUpdate(false)
     }catch(err){
-      console.log(err.message);
+      toast.error(err.message);
     }
   };
 

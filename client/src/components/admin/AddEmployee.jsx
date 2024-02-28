@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddEmployee = ({setIsShow}) => {
 
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-    
   const handleChange = (e) => {
     setFormData({
         ...formData,
@@ -24,12 +27,12 @@ const AddEmployee = ({setIsShow}) => {
         const data = await res.json();
         console.log(data);
         if(data.success === false) {
-        console.log(data.message);
+        toast.error(data.message);
         }
-        console.log(data.message);
-        window.location.reload();
+        toast.success(data.message);
+        setIsShow(false)
       }catch(err){
-        console.log(err);
+        toast.error("Something went wrong");
       }
   };
 

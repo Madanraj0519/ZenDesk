@@ -33,7 +33,7 @@ const registerUser = async(req, res, next) => {
                 res.status(200).
                  json({
                     success : true,
-                    message : 'User saved successfully',
+                    message : 'Verification email has been sent to your box successfully',
                     user,
                     token,
                 });
@@ -66,7 +66,7 @@ const loginUser = async (req, res, next) => {
         .status(200)
         .json({
             success: true,
-            message: 'User logged in successfully',
+            message: `Welcome back ${restDetails.userName}, `,
             restDetails,
             token,
         })
