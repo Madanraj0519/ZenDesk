@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs');
 
 
 const updateUser = async(req, res, next) => {
-    // if(req.user.id !== req.params.id){
-    //     return next(errorHandler(401, 'you can update only your account!'));
-    // }
+    if(req.user._id !== req.params.id){
+        return next(errorHandler(401, 'you can update only your account!'));
+    }
 
     try{
         if(req.body.userPassword){
@@ -42,6 +42,13 @@ const updateUser = async(req, res, next) => {
 
 
 const deleteUser = async(req, res, next) => {
+    
+    if (req.user._id !== req.params.id) {
+        return next(errorHandler(401, 'You can delete only your account!'));
+      }
+
+      console.log(req.user.id);
+      console.log(req.params.id);
     try{
         await userModel.findByIdAndDelete(req.params.id);
         res.status(200).

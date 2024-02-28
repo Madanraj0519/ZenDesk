@@ -7,11 +7,14 @@ const cors = require('cors');
 const { authRoute } = require('./route/auth.route');
 const nodemailer = require('nodemailer');
 const { userRoute } = require('./route/user.route');
+const cookieParser = require('cookie-parser');
+
 dotenv.config();
 
 const PORT = 3000;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 mongoose.connect(process.env.MONGO_DB)

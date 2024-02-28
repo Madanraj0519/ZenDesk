@@ -43,7 +43,7 @@ const VerifyEmail = () => {
             dispatch(signInFailure(data.message));
           }
 
-          localStorage.setItem("User", JSON.stringify(data));
+          // localStorage.setItem("User", JSON.stringify(data));
           dispatch(signInSuccess(data));
         }
       }

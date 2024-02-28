@@ -42,7 +42,7 @@ const SignIn = () => {
   return (
     <div className="absolute top-0 flex justify-center items-center bg-color h-full w-full">
           <div className="fixed md:3/4 lg:w-2/5 h-484 border border-gray-300 shadow-md p-6 bg-white px-12 mt-2">
-          <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div className="mt-6">
                 <h1 className='text-base font-medium font-poppins text-emerald-900'>Let us start with your work email</h1>
                 <input
@@ -68,11 +68,11 @@ const SignIn = () => {
               <button className='bg-emerald-900 w-full p-3 font-medium text-xl text-white' type='submit'>Next</button>
               <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter</span></p>
             </div>
-          </form>
+        </form>
            <h1 className='text-sm font-poppins text-emerald-700 mt-5'>By submitting my personal data, I consent to Zendesk collecting, 
             processing, and storing my information in accordance with the <span className='underline cursor-pointer'>Zendesk Privacy Notice</span>.</h1>
-          </div>
-        </div>
+      </div>
+    </div>
   )
 }
 

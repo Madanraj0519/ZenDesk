@@ -8,10 +8,12 @@ import Login from './pages/Login'
 import VerifyEmail from './pages/VerifyEmail';
 import Dashboard from './pages/Dashboard';
 import AdminBoard from './pages/AdminBoard';
+import AdminProfile from './pages/AdminProfile';
 
 // components
+import AdminPrivateRoute from './features/AdminPrivateRoute';
 import EmailVerify from './components/register/EmailVerify';
-import AdminProfile from './pages/AdminProfile';
+
 
 
 const App = () => {
@@ -22,11 +24,13 @@ const App = () => {
          <Route path='/register' element={<Register />} />
          <Route path='/login' element={<Login />} />
          <Route path='/verify-email' element={<VerifyEmail />} />
-         <Route path='/dashboard/admin' element={<AdminBoard />} />
-         <Route path='/dashboard/admin/profile' element={<AdminProfile />} />
 
+         <Route element={<AdminPrivateRoute />}>
+            <Route path='/dashboard/admin' element={<AdminBoard />} />
+            <Route path='/dashboard/admin/profile' element={<AdminProfile />} />
+         </Route>
 
-         <Route path='/email-verification' element={<EmailVerify />} />
+         {/* <Route path='/email-verification' element={<EmailVerify />} /> */}
        </Routes>
     </BrowserRouter>
   )

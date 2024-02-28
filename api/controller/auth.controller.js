@@ -9,7 +9,7 @@ const { sendEmail } = require('../utils/sendEmail/sendVerification');
 const createToken = (_id) => {
     const jwtSecretKey  = process.env.JWT_SECRET_KEY;
 
-    return jwt.sign({_id}, jwtSecretKey, { expiresIn : "1d"});
+    return jwt.sign({_id}, jwtSecretKey);
 }
 
 const registerUser = async(req, res, next) => {
@@ -31,8 +31,8 @@ const registerUser = async(req, res, next) => {
                 const token = createToken(user._id);
 
                 // Set cookie with expiration in 15 days
-                 const expirationDate = new Date(Date.now() + 15 * 24 * 3600 * 1000);
-                 res.cookie('token', token, { httpOnly: true, expires: expirationDate });
+                //  const expirationDate = new Date(Date.now() + 15 * 24 * 3600 * 1000);
+                //  res.cookie('token', token, { httpOnly: true, expires: expirationDate });
 
                  res.status(200).
                  json({
@@ -65,9 +65,9 @@ const loginUser = async (req, res, next) => {
 
          // Set cookie with expiration in 15 days
         const expirationDate = new Date(Date.now() + 15 * 24 * 3600 * 1000);
-        res.cookie('token', token, { httpOnly: true, expires: expirationDate });
-
-        res.status(200)
+        res
+        .cookie('access_token', token, { httpOnly: true, expires: expirationDate })
+        .status(200)
         .json({
             success: true,
             message: 'User logged in successfully',
@@ -98,13 +98,15 @@ const verifyEmail = async(req, res, next) => {
             await user.save();
             const token = createToken(user._id);
 
-            res.status(200).json({
+            // Set cookie with expiration in 2 minutes
+            const expirationDate = new Date(Date.now() - 1200000);
+            res.cookie('access_token', token, { httpOnly: true, expires: expirationDate })
+            .status(200)
+            .json({
                 success: true,
                 message : "Email verified successfully",
                 _id : user._id,
                 userEmail : user.userEmail,
-                userName : user.userName,
-                userPassword : user.userPassword,
                 token,
                 isVerified : user?.isVerified,
             })
