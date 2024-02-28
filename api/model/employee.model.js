@@ -1,25 +1,25 @@
 const { default: mongoose } = require("mongoose");
 
-const memberModel = new mongoose.Schema({
-    memberEmail : {
+const employeeModel = new mongoose.Schema({
+    employeeEmail : {
         type : String,
         required : true,
         unique : true
     },
-    memberName : {
+    employeeName : {
         type : String,
         required : true,
     },
-    memberPhone : {
+    employeePhone : {
         type : String,
         required : true,
         unique : true
     },
-    memberRole : {
+    employeeRole : {
         type : String,
         required : true,
     },
-    memberPassword : {
+    employeePassword : {
         type : String,
         required : true,
     },
@@ -30,4 +30,4 @@ const memberModel = new mongoose.Schema({
 }, { timestamps : true });
 
 
-module.exports = mongoose.model('Member', memberModel);
+module.exports = mongoose.model('Employee', employeeModel);

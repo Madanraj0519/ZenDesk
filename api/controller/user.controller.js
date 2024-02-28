@@ -46,9 +46,7 @@ const deleteUser = async(req, res, next) => {
     if (req.user._id !== req.params.id) {
         return next(errorHandler(401, 'You can delete only your account!'));
       }
-
-      console.log(req.user.id);
-      console.log(req.params.id);
+      
     try{
         await userModel.findByIdAndDelete(req.params.id);
         res.status(200).
@@ -60,6 +58,7 @@ const deleteUser = async(req, res, next) => {
         next(err);
     };
 };
+
 module.exports = {
     updateUser,
     deleteUser,

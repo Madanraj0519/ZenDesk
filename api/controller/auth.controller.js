@@ -30,11 +30,7 @@ const registerUser = async(req, res, next) => {
                 sendEmail(user);
                 const token = createToken(user._id);
 
-                // Set cookie with expiration in 15 days
-                //  const expirationDate = new Date(Date.now() + 15 * 24 * 3600 * 1000);
-                //  res.cookie('token', token, { httpOnly: true, expires: expirationDate });
-
-                 res.status(200).
+                res.status(200).
                  json({
                     success : true,
                     message : 'User saved successfully',
