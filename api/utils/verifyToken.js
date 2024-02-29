@@ -4,7 +4,7 @@ const errorHandler = require('../utils/errorHandler');
 const verifyToken = (req, res, next) => {
     const token = req.cookies.access_token;
 
-    console.log("token : ", token);
+    // console.log("token : ", token);
 
     if(!token) return next(errorHandler(401, "You are not authenticated"));
 
@@ -13,6 +13,7 @@ const verifyToken = (req, res, next) => {
         if(err) return next(errorHandler(403, "Token is not validated"));
 
         req.user = user;
+        // console.log("user : ", req.user);
         next();
     });
 };

@@ -23,6 +23,14 @@ const employeeModel = new mongoose.Schema({
         type : String,
         required : true,
     },
+    createdBy: {
+        _id : {
+            type : mongoose.Schema.Types.ObjectId,
+        },
+        userEmail : {
+            type : String,
+        }
+      },
     isAdmin : {
         type : Boolean,
         default : false,

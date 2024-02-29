@@ -1,4 +1,5 @@
 const employeeModel = require('../model/employee.model');
+const userModel = require('../model/user.model');
 const bcrypt = require('bcryptjs');
 const errorHandler = require('../utils/errorHandler');
 const jwt = require('jsonwebtoken');
@@ -13,8 +14,12 @@ const createToken = (_id) => {
 
 
 const getEmployee = async(req, res, next) => {
+
+    const loggedAdminId = req.user._id;
+
     try{
-        let employee = await employeeModel.find();
+
+        let employee = await employeeModel.find({'createdBy._id' : loggedAdminId});
 
         res.status(200).json({
             success:false,
@@ -22,38 +27,58 @@ const getEmployee = async(req, res, next) => {
             employees : employee
         });
 
+        console.log(employee);
     }catch(err){
         next(err);
     }
 };
 
-const createEmployee = async(req, res, next) => {
+const createEmployee = async (req, res, next) => {
+
     const { employeeEmail, employeeName, employeePhone, employeePassword, employeeRole } = req.body;
-            try{
-                let employee = await employeeModel.findOne({employeeEmail});
-                if(employee){
-                    next(errorHandler(400, 'Employee with this email already exists'))
-                }
-                const hashPassword = bcrypt.hashSync(employeePassword);
-                employee = await employeeModel({
-                    employeeEmail, employeeName, employeePhone,
-                    employeePassword : hashPassword, employeeRole
-                });
-                await employee.save();
+    const adminId = req.user._id;
+    // console.log("crete:",createdBy);
 
-                const token = createToken(employee._id);
+    try {
+        let admin = await userModel.findById({_id : adminId});     // console.log("admin:", admin);
 
-                res.status(200).
-                 json({
-                    success : true,
-                    message : 'Employee created successfully',
-                    employee,
-                    token,
-                });
-            }catch(err){
-                next(err);
-            }
+        if (!admin) {
+            return next(errorHandler(404, "Admin not found"));
+        }
+
+        const createBy = {
+            _id : admin._id,
+            userEmail : admin.userEmail,
+        }
+        let employee = await employeeModel.findOne({ employeeEmail });
+        if (employee) {
+            return next(errorHandler(400, 'Employee with this email already exists'));
+        }
+
+        const hashPassword = bcrypt.hashSync(employeePassword, 10); // 10 is the salt rounds
+        employee = new employeeModel({
+            employeeEmail, employeeName, employeePhone,
+            employeePassword: hashPassword, employeeRole,
+            createdBy : createBy,
+        });
+
+        await employee.save();
+
+        // console.log(employee);
+
+        const token = createToken(employee._id);
+
+        res.status(200).json({
+            success: true,
+            message: 'Employee created successfully',
+            employee,
+            token,
+        });
+    } catch (err) {
+        next(err);
+    }
 };
+
 
 
 const updateEmployee = async(req, res, next) => {

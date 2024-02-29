@@ -35,13 +35,15 @@ const Profile = () => {
       const data = await res.json();
       if(data.success === false) {
         dispatch(updateUserFailure(data));
-        toastr.error(data.message);
+        toast.error(data.message);
+        console.log(data.message);
       }
       dispatch(updateUserSuccess(data));
-      toastr.success(data.message);
+      toast.success(data.message);
     }catch(e){
       dispatch(updateUserFailure(e));
       toast.error("Something went wrong");
+      console.log(e);
     };
 
     // console.log(currentUser);
