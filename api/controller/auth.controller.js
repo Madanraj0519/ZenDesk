@@ -85,7 +85,7 @@ const verifyEmail = async(req, res, next) => {
 
         const user = await userModel.findOne({emailToken});
 
-        console.log(user);
+        // console.log(user);
         
         if(user){
             user.isVerified = true;

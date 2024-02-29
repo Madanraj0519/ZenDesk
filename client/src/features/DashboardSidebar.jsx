@@ -39,7 +39,7 @@ function DashboardSidebar() {
     },
     {
       Name: "Attendance",
-      links: "/admin/get/attendance",
+      links: "/dashboard/admin/ticket",
       child: (
         <>
           <FaCalendarAlt />

@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const  mongoose  = require("mongoose");
 
 const employeeModel = new mongoose.Schema({
     employeeEmail : {
@@ -35,6 +35,10 @@ const employeeModel = new mongoose.Schema({
         type : Boolean,
         default : false,
     },
+    ticketLists : {
+        type : [ mongoose.Schema.Types.ObjectId ],
+        ref : 'Ticket',
+    }
 }, { timestamps : true });
 
 

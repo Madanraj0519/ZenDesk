@@ -169,7 +169,7 @@ const AddEmployee = ({setIsShow}) => {
         </div>
       </form>
             </div>
-            </div>
+    </div>
   )
 }
 

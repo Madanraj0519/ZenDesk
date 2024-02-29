@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const ticketModel = new mongoose.Schema({
     customerName : {
@@ -25,9 +25,13 @@ const ticketModel = new mongoose.Schema({
         type : String,
         default : 'Pending',
     },
+    isAssigned : {
+        type : Boolean,
+        default : false,
+    },
     assignedTo : {
         type : mongoose.Schema.Types.ObjectId,
-        // ref : 'Employee'
+        ref : 'Employee'
     },
 }, { timestamps : true });
 

@@ -47,31 +47,31 @@ const EmployeeList = () => {
     <div className="overflow-x-auto px-4 mt-20 h-screen">
       <div className='flex justify-end'>
         <button 
-         className="bg-green-800 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
+         className="bg-green-800 mt-5 mb-3 hover:scale-110 duration-200 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
         onClick={() => setIsShow(true)}>Add Employee</button>
       </div>
-      <table className="table-auto w-60 rounded-md">
+      <table className="table-auto w-full rounded-md">
         <thead>
           <tr className='bg-slate-800'>
-            <th className="px-4 py-2 text-xl">Name</th>
-            <th className="px-4 py-2 text-xl">Email</th>
-            <th className="px-4 py-2 text-xl">Phone</th>
-            <th className="px-4 py-2 text-xl">Role</th>
-            <th className="px-4 py-2 text-xl">Id</th>
-            <th className="px-4 py-2 text-xl">Created At</th>
-            <th className="px-4 py-2 text-xl">Edit</th>
+            <th className="px-4 py-2 text-lg">Id</th>
+            <th className="px-4 py-2 text-lg">Name</th>
+            <th className="px-4 py-2 text-lg">Email</th>
+            <th className="px-4 py-2 text-lg">Phone</th>
+            <th className="px-4 py-2 text-lg">Role</th>
+            <th className="px-4 py-2 text-lg">Created At</th>
+            <th className="px-4 py-2 text-lg"></th>
           </tr>
         </thead>
         <tbody>
           {currentPageData.map((row, index) => (
             <tr key={index} className='bg-zinc-100'>
-              <td className="border px-4 py-2 text-lg">{row.employeeName}</td>
-              <td className="border px-4 py-2 text-lg">{row.employeeEmail}</td>
-              <td className="border px-4 py-2 text-lg">{row.employeePhone}</td>
-              <td className="border px-4 py-2 text-lg">{row.employeeRole}</td>
-              <td className="border px-4 py-2 text-lg">{row._id}</td>
-              <td className="border px-4 py-2 text-lg">{row.createdAt}</td>
-              <td className="border px-4 py-2 text-lg cursor-pointer" onClick={() => handleShowUpdate(row._id)}><MdEditSquare className='text-3xl text-green-700' /></td>
+              <td className="border px-4 py-2 text-base">{row._id}</td>
+              <td className="border px-4 py-2 text-base">{row.employeeName}</td>
+              <td className="border px-4 py-2 text-base">{row.employeeEmail}</td>
+              <td className="border px-4 py-2 text-base">{row.employeePhone}</td>
+              <td className="border px-4 py-2 text-base">{row.employeeRole}</td>
+              <td className="border px-4 py-2 text-base">{row.createdAt}</td>
+              <td className="border px-4 py-2 text-base cursor-pointer" onClick={() => handleShowUpdate(row._id)}><MdEditSquare className='text-3xl text-green-700' /></td>
             </tr>
           ))}
         </tbody>

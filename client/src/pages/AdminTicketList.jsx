@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DashboardHeader from "../features/DashboardHeader";
 import DashboardSidebar from "../features/DashboardSidebar";
-import AddUser from "../components/admin/EditEmployee";
-import Profile from "../components/admin/Profile";
+import EmployeeList from "../components/admin/EmployeeList";
+import TicketList from "../components/admin/TicketList";
 
-function AdminProfile() {
+function AdminBoard() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   const navigate = useNavigate();
@@ -39,12 +39,12 @@ function AdminProfile() {
       onClick={handleCloseSidebar}
     ></div>
     <div className={showSidebar ? "" : ""}>
-      <div className="flex flex-col justify-center items-center bg-slate-200 w-full">
-        <Profile />
+      <div className="flex flex-col justify-center items-center bg-slate-200  w-full">
+        <TicketList />
       </div>
     </div>
-    </div>
+  </div>
   );
 }
 
-export default AdminProfile;
+export default AdminBoard;

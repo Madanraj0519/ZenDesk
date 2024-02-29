@@ -3,6 +3,9 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+// components
+import AdminPrivateRoute from './features/AdminPrivateRoute';
+
 // Pages
 import Home from './pages/Home';
 import Register from './pages/Register';
@@ -11,11 +14,7 @@ import VerifyEmail from './pages/VerifyEmail';
 import Dashboard from './pages/Dashboard';
 import AdminBoard from './pages/AdminBoard';
 import AdminProfile from './pages/AdminProfile';
-
-// components
-import AdminPrivateRoute from './features/AdminPrivateRoute';
-
-
+import AdminTicketList from './pages/AdminTicketList';
 
 
 const App = () => {
@@ -30,6 +29,7 @@ const App = () => {
          <Route element={<AdminPrivateRoute />}>
             <Route path='/dashboard/admin' element={<AdminBoard />} />
             <Route path='/dashboard/admin/profile' element={<AdminProfile />} />
+            <Route path='/dashboard/admin/ticket' element={<AdminTicketList />} />
          </Route>
        </Routes>
        <ToastContainer

@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const errorHandler = require('../utils/errorHandler');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const path = require('path');
 
 
 const createToken = (_id) => {
@@ -19,7 +20,8 @@ const getEmployee = async(req, res, next) => {
 
     try{
 
-        let employee = await employeeModel.find({'createdBy._id' : loggedAdminId});
+        let employee = await employeeModel.find({'createdBy._id' : loggedAdminId})
+                         .populate({path : 'ticketLists', model : 'Ticket'});
 
         res.status(200).json({
             success:false,

@@ -39,18 +39,21 @@ table {
   border-collapse: separate;
   border-spacing: 0 5px;
   margin-top: 5px;
+  border-radius: 20px;
 }
 
 th {
   color: white;
+  
 }
 
 th,
 td {
-  width: 150px;
+  /* width: 150px; */
+  /* height: 20px; */
   text-align: center;
   border: 0px solid black;
-  padding: 5px;
+  /* padding: 5px; */
   border-left:0; 
   border-right:0; 
   border-top:0; 
