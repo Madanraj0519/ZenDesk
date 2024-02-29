@@ -27,7 +27,7 @@ const getEmployee = async(req, res, next) => {
             employees : employee
         });
 
-        console.log(employee);
+        // console.log(employee);
     }catch(err){
         next(err);
     }
@@ -50,6 +50,7 @@ const createEmployee = async (req, res, next) => {
             _id : admin._id,
             userEmail : admin.userEmail,
         }
+        
         let employee = await employeeModel.findOne({ employeeEmail });
         if (employee) {
             return next(errorHandler(400, 'Employee with this email already exists'));

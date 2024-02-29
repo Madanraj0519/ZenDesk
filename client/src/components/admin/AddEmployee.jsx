@@ -161,7 +161,7 @@ const AddEmployee = ({setIsShow}) => {
         {/* <!-- Submit button --> */}
         <div className="flex justify-center items-center">
           <button
-            className="bg-green-800 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
+            className="bg-green-700 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-800 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Create

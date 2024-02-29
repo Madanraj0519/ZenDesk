@@ -180,7 +180,7 @@ className="bg-slate-800 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 ma
 <div className="flex justify-center items-center">
   <button
   onClick={handleUpdate}
-    className="bg-green-800 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
+    className="bg-green-700 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-800 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
     type="submit"
   >
     Update

@@ -60,14 +60,14 @@ function DashboardSidebar() {
 
   return (
     <section className="flex w-full">
-      <div className="bg-green-800 min-h-screen duration-500 text-gray-100 px-4 flex flex-col items-center">
-        <div className="flex justify-center items-start h-full w-24">
+      <div className="bg-green-700 min-h-screen duration-500 text-gray-100 px-4 flex flex-col items-center">
+        <div className="flex justify-center items-start h-full w-20">
           <div className="flex flex-col gap-6 lg:gap-7 relative mt-5 w-full">
             {Admin?.map((admins, i) => (
              <div className="">
                  <Link
                 to={admins?.links}
-                className="group flex justify-center items-center text-sm gap-3.5 font-medium p-2 hover:bg-white hover:text-orange-700 rounded-md scale-110 duration-200"
+                className="group flex justify-center items-center text-sm gap-3.5 font-medium p-2 hover:bg-white hover:text-orange-600 rounded-md scale-110 duration-200"
                 key={i}
               >
                 <div className="text-3xl  flex items-center justify-center w-full">{admins?.child}</div>

@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
 const { userRoute } = require('./route/user.route');
 const cookieParser = require('cookie-parser');
 const { employeeRoute } = require('./route/employee.route');
+const { ticketRoute } = require('./route/ticket.route');
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ mongoose.connect(process.env.MONGO_DB)
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
 app.use('/api/employee', employeeRoute);
+app.use('/api/ticket', ticketRoute);
 
 app.listen(PORT, () => {
     console.log(`Listening on port, http://localhost:${PORT} `);

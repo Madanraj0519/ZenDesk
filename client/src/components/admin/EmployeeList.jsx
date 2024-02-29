@@ -71,7 +71,7 @@ const EmployeeList = () => {
               <td className="border px-4 py-2 text-lg">{row.employeeRole}</td>
               <td className="border px-4 py-2 text-lg">{row._id}</td>
               <td className="border px-4 py-2 text-lg">{row.createdAt}</td>
-              <td className="border px-4 py-2 text-lg cursor-pointer" onClick={() => handleShowUpdate(row._id)}><MdEditSquare className='text-3xl text-green-800' /></td>
+              <td className="border px-4 py-2 text-lg cursor-pointer" onClick={() => handleShowUpdate(row._id)}><MdEditSquare className='text-3xl text-green-700' /></td>
             </tr>
           ))}
         </tbody>
