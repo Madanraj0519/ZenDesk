@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // components
 import AdminPrivateRoute from './features/AdminPrivateRoute';
+import EmployeePrivateRoute from './features/EmployeePrivateRoute';
 
 // Pages
 import Home from './pages/Home';
@@ -16,6 +17,8 @@ import AdminBoard from './pages/AdminBoard';
 import AdminProfile from './pages/AdminProfile';
 import AdminTicketList from './pages/AdminTicketList';
 import CreateTicketPage from './pages/CreateTicketPage';
+import EmployeeLogin from './pages/EmployeeLogin';
+import EmployeeProfilePage from './pages/EmployeeProfilePage';
 
 
 const App = () => {
@@ -25,6 +28,7 @@ const App = () => {
          <Route path='/' element={<Home />} />
          <Route path='/register' element={<Register />} />
          <Route path='/login' element={<Login />} />
+         <Route path='/employee-login' element={<EmployeeLogin />} />
          <Route path='/create-ticket' element={<CreateTicketPage />} />
          <Route path='/verify-email' element={<VerifyEmail />} />
 
@@ -33,6 +37,11 @@ const App = () => {
             <Route path='/dashboard/admin/profile' element={<AdminProfile />} />
             <Route path='/dashboard/admin/ticket' element={<AdminTicketList />} />
          </Route>
+
+         <Route element={<EmployeePrivateRoute />}>
+            <Route path='/dashboard/employee/profile' element={<EmployeeProfilePage />} />
+         </Route>
+
        </Routes>
        <ToastContainer
           position="top-right"

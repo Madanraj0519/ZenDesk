@@ -16,7 +16,6 @@ const SignIn = () => {
   };
 
   const handleSubmit = async(e) => {
-    console.log(formData);
     e.preventDefault();  /* this will prevent refreshing the page when we submit the form*/ 
 
     try{

@@ -82,7 +82,41 @@ const createEmployee = async (req, res, next) => {
     }
 };
 
+const loginEmployee = async (req, res, next) => {
 
+    const {employeeEmail, employeePassword} = req.body;
+
+    try{
+        const validEmployee = await employeeModel.findOne({ employeeEmail });
+        if(!validEmployee){
+            return next(errorHandler(404, 'Employee is not found'));
+        }
+        //comparing the password which is coming from the request and in the database
+        const validPassword = bcrypt.compareSync(employeePassword, validEmployee.employeePassword);
+
+        if(!validPassword){
+            return next(errorHandler(401, 'Invalid credentials'));
+        }
+
+        const {employeePassword : hashPassword, ...restDetails} = validEmployee._doc;
+        const token = createToken(validEmployee._id);
+
+         // Set cookie with expiration in 15 days
+        const expirationDate = new Date(Date.now() + 15 * 24 * 3600 * 1000);
+        res
+        .cookie('access_token', token, { httpOnly: true, expires: expirationDate })
+        .status(200)
+        .json({
+            success: true,
+            message: `Welcome back ${restDetails.employeeName}, `,
+            restDetails,
+            token,
+        })
+        
+       }catch(err){
+        next(err)
+       }
+};
 
 const updateEmployee = async(req, res, next) => {
     
@@ -138,9 +172,20 @@ const deleteEmployee = async(req, res, next) => {
     };
 };
 
+const employeeSignOut = (req, res, next) => {
+    res.clearCookie('access_token')
+    .status(200)
+    .json({
+        success: true,
+        message: 'Sign out successfully',
+    })
+};
+
 module.exports = {
     getEmployee,
     createEmployee,
+    loginEmployee,
     updateEmployee,
     deleteEmployee,
+    employeeSignOut,
 }

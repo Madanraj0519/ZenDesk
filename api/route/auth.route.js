@@ -8,8 +8,8 @@ authRoute.get('/', getUsers);
 authRoute.post('/register', registerUser);
 authRoute.post('/login', loginUser);
 authRoute.post('/verify-email', verifyEmail);
-authRoute.get('/admin-employees-data', verifyToken ,adminEmployeeData);
-authRoute.get('signout', signOut);
+// authRoute.get('/admin-employees-data', verifyToken ,adminEmployeeData);
+authRoute.get('/signout', signOut);
 
 
 module.exports = {

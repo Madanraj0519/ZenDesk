@@ -1,88 +1,65 @@
-import React, { useState } from 'react';
-import {useDispatch, useSelector,} from "react-redux"
-import {updateUserStart, updateUserSuccess, updateUserFailure,
-        deleteUserStart, deleteUserSuccess, deleteUserFailure,
-        signOut} from "../../redux/auth/userSlice";
+import React, {useState} from 'react'
+import {useDispatch, useSelector,} from "react-redux";
 import {Navigate, useNavigate} from "react-router-dom"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { updateEmployeeStart, updateEmployeeSuccess, 
+         updateEmployeeFailure, employeeSignOut  } from "../../redux/auth/employeeSlice";
 
+const EmployeeProfile = () => {
 
-const Profile = () => {
- 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({});
-  const { currentUser} = useSelector((state) => state.user);
+  const [updatedData, setUpdatedData] = useState({});
+  const {currentEmployee} = useSelector((state) => state.employee);
 
-  const handleChange = (e) => {
-    setFormData({...formData, [e.target.id] : e.target.value});
-  };
+  // console.log("currentEmployee :", currentEmployee.restDetails);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-      dispatch(updateUserStart());
-      const res = await fetch(`/api/user/update/${currentUser.restDetails._id}`, {
+      dispatch(updateEmployeeStart());
+      const res = await fetch(`/api/employee/update/${currentEmployee.restDetails._id}`, {
         method : 'POST',
         headers : {
           'Content-Type': 'application/json',
         },
-        body : JSON.stringify(formData),
+        body : JSON.stringify(updatedData),
       });
       const data = await res.json();
       if(data.success === false) {
-        dispatch(updateUserFailure(data));
+        dispatch(updateEmployeeFailure(data));
         toast.error(data.message);
         console.log(data.message);
       }
-      dispatch(updateUserSuccess(data));
+      dispatch(updateEmployeeSuccess(data));
       toast.success(data.message);
-    }catch(e){
-      dispatch(updateUserFailure(e));
+    }catch(err){
+      dispatch(updateEmployeeFailure(e));
       toast.error("Something went wrong");
       console.log(e);
     };
-
-    // console.log(currentUser);
   };
 
-  const handleDeleteAccount = async() => {
-    try{
-      dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser.restDetails._id}`, {
-        method : 'DELETE',
-      });
-      const data = await res.json();
-      if(data.success === false){
-        dispatch(deleteUserFailure());
-        toast.error(data.message);
-        return;
-      }
-      dispatch(deleteUserSuccess(data));
-      navigate('/register');
-      toast.error(data.message);
-    }catch(err){
-      dispatch(deleteUserFailure(err));
-      toast.error("Something went wrong");
-    }
-  }
+  const handleChange = (e) => {
+    setUpdatedData({
+      ...updatedData,
+      [e.target.id] : e.target.value,
+    })
+  };
 
   const handleSignOut = async() => {
     try{
-      await fetch('/api/auth/signout');
-      // localStorage.removeItem('token');
-      dispatch(signOut());
+      await fetch('/api/employee/employee-signout');
+      dispatch(employeeSignOut());
       toast.warning("Singed out")
     }catch(err){
       console.log(err);
     }
   };
 
-
-
   return (
-    <div className="flex flex-col justify-center items-center h-screen mt-20">
+    <div className="flex flex-col justify-center items-center h-screen ">
     <div className="flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}
@@ -104,11 +81,11 @@ const Profile = () => {
             <input
               className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
               type="text"
-              id="userName"
-              name="userName"
+              id="employeeName"
+              name="employeeName"
               placeholder="John Doe"
               onChange={handleChange}
-              defaultValue={currentUser.restDetails.userName}
+              defaultValue={currentEmployee.restDetails.employeeName}
             
             />
           </div>
@@ -124,11 +101,11 @@ const Profile = () => {
             <input
               className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
               type="tel"
-              id="userPhone"
-              name="userPhone"
+              id="employeePhone"
+              name="employeePhone"
               placeholder="9876543210"
               onChange={handleChange}
-              defaultValue={currentUser.restDetails.userPhone}
+              defaultValue={currentEmployee.restDetails.employeePhone}
          
             />
           </div>
@@ -144,11 +121,11 @@ const Profile = () => {
             <input
               className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
               type="email"
-              id="userEmail"
-              name="userEmail"
+              id="employeeEmail"
+              name="employeeEmail"
               onChange={handleChange}
               placeholder="john.doe@example.com"
-              defaultValue={currentUser.restDetails.userEmail}
+              defaultValue={currentEmployee.restDetails.employeeEmail}
             />
           </div>
 
@@ -158,57 +135,18 @@ const Profile = () => {
               class="block text-gray-200 text-sm font-bold mb-3"
               for="height"
             >
-              Job
+              Role
             </label>
             <input
               className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
               type="text"
-              id="userJob"
-              name="userJob"
+              id="employeeRole"
+              name="employeeRole"
               onChange={handleChange}
               placeholder="Software developer"
-              defaultValue={currentUser.restDetails.userJob}
+              defaultValue={currentEmployee.restDetails.employeeRole}
             />
           </div>
-
-    
-          <div class="col-span-1">
-            <label
-              class="block text-gray-200 text-sm font-bold mb-3"
-              for="weight"
-            >
-              Company
-            </label>
-            <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
-              type="text"
-              id="userCompany"
-              name="userCompany"
-              onChange={handleChange}
-              placeholder="Teenofes"
-              defaultValue={currentUser.restDetails.userCompany}
-            />
-          </div>
-
-        
-          <div class="col-span-1">
-            <label
-              class="block text-gray-200 text-sm font-bold mb-3"
-              for="blood-group"
-            >
-                No of employees
-            </label>
-            <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
-              type="text"
-              id="userEmployees"
-              name="userEmployees"
-              onChange={handleChange}
-              placeholder="24"
-              defaultValue={currentUser.restDetails.userEmployees}
-            />
-          </div>
-
          
           <div class="col-span-1">
             <label
@@ -219,9 +157,9 @@ const Profile = () => {
             </label>
             <input
               className="border-transparent border-2  focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 w-full rounded-lg focus:outline-none focus:shadow-outline"
-              id="userPassword"
+              id="employeePassword"
               type='text'
-              name="userPassword"
+              name="employeePassword"
               onChange={handleChange}
               placeholder="Enter your password"
             ></input>
@@ -239,7 +177,7 @@ const Profile = () => {
         </div>
       </form>
       <div>
-        <button onClick={handleDeleteAccount} className='cursor-pointer'>Delete account</button>
+        {/* <button onClick={handleDeleteAccount} className='cursor-pointer'>Delete account</button> */}
         <button onClick={handleSignOut} className='cursor-pointer'>Sign out</button>
       </div>
     </div>
@@ -247,4 +185,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default EmployeeProfile
