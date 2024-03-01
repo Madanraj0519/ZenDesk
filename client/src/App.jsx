@@ -21,7 +21,6 @@ import EmployeeLogin from './pages/EmployeeLogin';
 import EmployeeProfilePage from './pages/EmployeeProfilePage';
 import EmployeeTicketList from './pages/EmployeeTicketList';
 
-
 const App = () => {
   return (
     <BrowserRouter>

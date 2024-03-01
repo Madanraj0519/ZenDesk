@@ -63,7 +63,9 @@ const AssignEmployee = ({ticketId, isAssigned}) => {
         {
           !isAssigned ?
           (
-            <select onChange={(e) => { 
+            <select
+             className='bg-zinc-100'
+             onChange={(e) => { 
               handleAssignEmployee(e.target.value)
             }}>
                  <option value="Low">UnAssigned</option>
@@ -74,7 +76,9 @@ const AssignEmployee = ({ticketId, isAssigned}) => {
                  }
             </select>
           ) : (
-            <select onChange={(e) => { 
+            <select
+            className='bg-zinc-100'
+             onChange={(e) => { 
               handleUnAssignEmployee(e.target.value);
             }}>
                  <option>Assigned</option>

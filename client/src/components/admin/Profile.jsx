@@ -82,7 +82,7 @@ const Profile = () => {
 
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen mt-20">
+    <div className="flex flex-col justify-center items-center h-screen ">
     <div className="flex flex-col justify-center items-center">
       <form
         onSubmit={handleSubmit}

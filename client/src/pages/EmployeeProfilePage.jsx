@@ -20,9 +20,9 @@ const EmployeeProfilePage = () => {
         showSidebar={showSidebar}
         handleToggleSidebar={handleToggleSidebar}
          />
-      {!showSidebar && (
+      {showSidebar && (
         <div className="fixed top-0 left-0 h-screen mt-16  text-white z-50">
-          <DashboardSidebar />
+          <DashboardSidebar handleToggleSidebar={handleToggleSidebar} />
         </div>
       )}
       <div
@@ -33,7 +33,7 @@ const EmployeeProfilePage = () => {
         }
         onClick={handleCloseSidebar}
       ></div>
-      <div className={showSidebar ? "" : ""}>
+      <div className={showSidebar ? "filter blur-sm" : ""}>
         <div className="flex flex-col justify-center items-center bg-slate-200 w-full">
            <EmployeeProfile />
         </div>

@@ -1,22 +1,16 @@
 import { Link } from "react-router-dom";
 import {
   FaUser,
-  FaEdit,
-  FaAddressCard,
   FaCalendarAlt,
-  FaBoxOpen,
 } from "react-icons/fa";
-import { RiUserFollowLine } from "react-icons/ri";
 import { TiGroup } from "react-icons/ti";
-import { RiMessage2Fill } from "react-icons/ri";
-import { IoMdLogOut } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
-import { RiAdminFill } from "react-icons/ri";
 import { GiMoneyStack } from "react-icons/gi";
 import logo from "../images/zen-logo.png";
 import { useSelector } from "react-redux";
+import { FiMenu, FiX } from "react-icons/fi";
+import { VscCloseAll } from "react-icons/vsc";
 
-function DashboardSidebar() {
+function DashboardSidebar({handleToggleSidebar}) {
 
   const { currentUser } = useSelector((state) => state.user);
 
@@ -48,16 +42,6 @@ function DashboardSidebar() {
         </>
       ),
     },
-    {
-      Name: "Clients",
-      links: "/admin/all/clients",
-      child: (
-        <>
-          <TiGroup />
-        </>
-      ),
-    },
-   
   ] : 
   [
     {
@@ -78,47 +62,38 @@ function DashboardSidebar() {
         </>
       ),
     },
-    {
-      Name: "Attendance",
-      links: "/dashboard/admin/ticket",
-      child: (
-        <>
-          <FaCalendarAlt />
-        </>
-      ),
-    },
-    {
-      Name: "Clients",
-      links: "/admin/all/clients",
-      child: (
-        <>
-          <TiGroup />
-        </>
-      ),
-    },
+    // {
+    //   Name: "Attendance",
+    //   links: "/dashboard/admin/ticket",
+    //   child: (
+    //     <>
+    //       <FaCalendarAlt />
+    //     </>
+    //   ),
+    // },
   ] 
 
   return (
-    <section className="flex w-full">
-      <div className="bg-green-700 min-h-screen duration-500 text-gray-100 px-4 flex flex-col items-center">
-        <div className="flex justify-center items-start h-full w-20">
-          <div className="flex flex-col gap-6 lg:gap-7 relative mt-5 w-full">
-            {
-             Admin?.map((admins, i) => (
-             <div className="">
-                 <Link
-                to={admins?.links}
-                className="group flex justify-center items-center text-sm gap-3.5 font-medium p-2 hover:bg-white hover:text-orange-600 rounded-md scale-110 duration-200"
-                key={i}
-              >
-                <div className="text-3xl  flex items-center justify-center w-full">{admins?.child}</div>
-              </Link>
-             </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="fixed left-0 top-0 w-60 h-full bg-green-700 p-4 z-50 sidebar-menu transition-transform">
+    <div class="flex items-center pb-4 border-b border-b-gray-800">
+        <img src={logo} alt="" class="w-8 h-8 rounded object-cover"/>
+        <span class="text-xl font-bold text-white lowercase mt-1 ml-1">en Desk</span>
+        <div className="ml-16 text-4xl cursor-pointer " onClick={handleToggleSidebar} ><VscCloseAll /></div>
+    </div>
+    <ul class="mt-4">
+        {
+            Admin?.map((admins, i) => (
+            <li class="mb-1 group" onClick={handleToggleSidebar}>
+            <Link to={admins?.links} 
+            key={i} class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <div class="mr-3 text-lg">{admins?.child}</div>
+                <span class="text-base">{admins?.Name}</span>
+            </Link>
+            </li>
+            ))
+        }
+    </ul>
+ </div>
   );
 }
 

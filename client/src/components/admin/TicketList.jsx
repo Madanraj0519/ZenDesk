@@ -66,7 +66,7 @@ const TicketList = () => {
 
   return (
     <>
-    <div className="overflow-x-auto mt-20 h-screen">
+    <div className="overflow-x-auto px-4 mt-20 h-screen w-full md:max-w-6xl">
       <table className="table-auto w-full rounded-md">
         <thead>
           <tr className='bg-slate-800'>

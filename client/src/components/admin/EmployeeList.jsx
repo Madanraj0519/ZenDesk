@@ -44,7 +44,7 @@ const EmployeeList = () => {
 
   return (
     <>
-    <div className="overflow-x-auto px-4 mt-20 h-screen">
+    <div className="overflow-x-auto px-4 mt-20 h-screen w-full md:max-w-6xl">
       <div className='flex justify-end'>
         <button 
          className="bg-green-800 mt-5 mb-3 hover:scale-110 duration-200 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
