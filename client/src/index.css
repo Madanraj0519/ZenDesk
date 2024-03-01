@@ -5,10 +5,6 @@
 @tailwind utilities;
 
 
-/* body {
-    background:#fff7ed;
-} */
-
 *{
   /* text-transform: capitalize; */
 }
@@ -64,7 +60,7 @@ td {
   /*PAGINATION*/
   .paginationContainer {
     display: flex;
-    justify-content: end;
+    justify-content:end;
     gap: 3px;
     padding: 10px;
     flex-wrap: wrap;

@@ -6,7 +6,7 @@ import ResolvedQuery from './ResolvedQuery';
 
 const EmployeeTicket = () => {
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(0);
   const [ ticketData, setTicketData ] = useState([]);
   const [defaultData, setDefaultData ] = useState(undefined);
@@ -38,37 +38,55 @@ const EmployeeTicket = () => {
     setDefaultData(data[0]);
   };
 
-  console.log(defaultData);
+  // console.log(defaultData);
 
   return (
     <>
-    <div className="overflow-x-auto px-4 mt-20 h-screen w-full md:max-w-6xl">
-      <table className="table-auto w-full rounded-md">
-        <thead>
-          <tr className='bg-slate-800'>
-            <th className="px-4 py-2 text-lg">Id</th>
-            <th className="px-4 py-2 text-lg">Email</th>
-            <th className="px-4 py-2 text-lg">Phone</th>
-            <th className="px-4 py-2 text-lg">Title</th>
-            <th className="px-4 py-2 text-lg">Status</th>
-            <th className="px-4 py-2 text-lg">AssignedBy</th>
-            <th className="px-4 py-2 text-lg"></th>
+    <div className="p-5 h-screen mt-20 w-full md:max-w-7xl">
+     <h1>Tickets Assigned to Employee</h1>
+     <div className='overflow-auto rounded-lg shadow-md'>
+       <table className="w-full">
+        <thead className='bg-slate-800 border-b-2 border-gray-700'>
+          <tr>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide">Id</th>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide">Email</th>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide">Phone</th>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide">Title</th>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide">Status</th>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide">AssignedBy</th>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='divide-y divide-gray-100'>
           {currentPageData.map((row, index) => (
-            <tr key={index} className='bg-zinc-100'>
-              <td className="border px-4 py-2 text-base">{row._id}</td>
-              <td className="border px-4 py-2 text-base">{row.customerEmail}</td>
-              <td className="border px-4 py-2 text-base">{row.customerPhone}</td>
-              <td className="border px-4 py-2 text-base">{row.ticketTitle}</td>
-              <td className="border px-4 py-2 text-base">{row.ticketStatus}</td>
-              <td className="border px-4 py-2 text-base">{row.belongToAdmin.userName}</td>
-              <td className="border px-4 py-2 text-base cursor-pointer" onClick={() => handleShowUpdate(row._id)}><MdOutlineViewInAr className='text-3xl text-green-700' /></td>
+            <tr key={index} className={`${index % 2 === 0 ? "bg-zinc-100" : "bg-zinc-200"}`}>
+              <td className="p-2 text-sm whitespace-nowrap text-blue-700">
+                <span className='p-1.5 text-xs font-medium uppercase tracking-wider
+                  text-blue-800 bg-blue-200 rounded-lg bg-opacity-50'>{row._id}</span>
+              </td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">{row.customerEmail}</td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">{row.customerPhone}</td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">{row.ticketTitle}</td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">{
+                row.ticketStatus === "Resolved" ? ( 
+                  <span className='p-1.5 text-xs font-medium uppercase tracking-wider
+                  text-green-800 bg-green-200 rounded-lg bg-opacity-50'>{row.ticketStatus}</span>
+                ) : row.ticketStatus === "Rejected" ? (
+                  <span className='p-1.5 text-xs font-medium uppercase tracking-wider
+                  text-red-800 bg-red-200 rounded-lg bg-opacity-50'>{row.ticketStatus}</span>
+                ) : (
+                  <span className='p-1.5 text-xs font-medium uppercase tracking-wider
+                  text-gray-900 bg-gray-200 rounded-lg bg-opacity-50'>{row.ticketStatus}</span>
+                )
+                }
+              </td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">{row.belongToAdmin.userName}</td>
+              <td className="border px-2 py-2 text-base cursor-pointer" onClick={() => handleShowUpdate(row._id)}><MdOutlineViewInAr className='text-3xl text-green-700' /></td>
             </tr>
           ))}
         </tbody>
       </table>
+       </div>
       
      <div className='pagination'>
      <ReactPaginate

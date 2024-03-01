@@ -64,25 +64,27 @@ const AssignEmployee = ({ticketId, isAssigned}) => {
           !isAssigned ?
           (
             <select
-             className='bg-zinc-100'
+             className='p-1 text-xs font-medium uppercase tracking-wider
+             text-red-800 bg-red-200 rounded-lg bg-opacity-50'
              onChange={(e) => { 
               handleAssignEmployee(e.target.value)
             }}>
-                 <option value="Low">UnAssigned</option>
+                 <option>UnAssigned</option>
                  {
                   employeeData.map((employee) =>  (
-                      <option key={employee._id} value={employee._id}>{employee.employeeName}</option>
+                      <option className='bg-white' key={employee._id} value={employee._id}>{employee.employeeName}</option>
                   ))
                  }
             </select>
           ) : (
             <select
-            className='bg-zinc-100'
+            className='p-1 text-xs font-medium uppercase tracking-wider
+            text-green-800 bg-green-200 rounded-lg bg-opacity-50'
              onChange={(e) => { 
               handleUnAssignEmployee(e.target.value);
             }}>
-                 <option>Assigned</option>
-                 <option value={ticketId}>UnAssign</option>
+                 <option >Assigned</option>
+                 <option className='bg-white' value={ticketId}>UnAssign</option>
             </select>
           )
         }

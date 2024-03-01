@@ -6,7 +6,7 @@ import { MdEditSquare } from "react-icons/md";
 
 const EmployeeList = () => {
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 7;
   const [employeeData, setEmployeeData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [isShow, setIsShow] = useState(false);
@@ -44,38 +44,47 @@ const EmployeeList = () => {
 
   return (
     <>
-    <div className="overflow-x-auto px-4 mt-20 h-screen w-full md:max-w-6xl">
+    <div className="p-5 h-screen mt-16 w-full md:max-w-7xl">
+      <h1>Employee List</h1>
       <div className='flex justify-end'>
         <button 
          className="bg-green-800 mt-5 mb-3 hover:scale-110 duration-200 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
         onClick={() => setIsShow(true)}>Add Employee</button>
       </div>
-      <table className="table-auto w-full rounded-md">
-        <thead>
-          <tr className='bg-slate-800'>
-            <th className="px-4 py-2 text-lg">Id</th>
-            <th className="px-4 py-2 text-lg">Name</th>
-            <th className="px-4 py-2 text-lg">Email</th>
-            <th className="px-4 py-2 text-lg">Phone</th>
-            <th className="px-4 py-2 text-lg">Role</th>
-            <th className="px-4 py-2 text-lg">Created At</th>
-            <th className="px-4 py-2 text-lg"></th>
+    <div className='overflow-auto rounded-lg shadow-md'>
+      <table className="w-full">
+        <thead className='bg-slate-800 border-b-2 border-gray-700'>
+          <tr>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide ">Id</th>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide ">Name</th>
+            <th className="p-3 w-24  text-sm font-semibold text-center tracking-wide ">Email</th>
+            <th className="p-3 w-24  text-sm font-semibold text-center tracking-wide ">Phone</th>
+            <th className="p-3 w-24  text-sm font-semibold text-center tracking-wide ">Role</th>
+            <th className="p-3 w-24  text-sm font-semibold text-center tracking-wide ">Created At</th>
+            <th className="p-3 w-24 text-sm font-semibold text-center tracking-wide "></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='divide-y divide-gray-100'>
           {currentPageData.map((row, index) => (
-            <tr key={index} className='bg-zinc-100'>
-              <td className="border px-4 py-2 text-base">{row._id}</td>
-              <td className="border px-4 py-2 text-base">{row.employeeName}</td>
-              <td className="border px-4 py-2 text-base">{row.employeeEmail}</td>
-              <td className="border px-4 py-2 text-base">{row.employeePhone}</td>
-              <td className="border px-4 py-2 text-base">{row.employeeRole}</td>
-              <td className="border px-4 py-2 text-base">{row.createdAt}</td>
-              <td className="border px-4 py-2 text-base cursor-pointer" onClick={() => handleShowUpdate(row._id)}><MdEditSquare className='text-3xl text-green-700' /></td>
+            <tr key={index} className={`${index % 2 === 0 ? "bg-zinc-100" : "bg-zinc-200"}`}>
+              <td className="p-2 text-sm whitespace-nowrap text-blue-700">
+              <span className='p-1.5 text-xs font-medium uppercase tracking-wider
+                  text-blue-800 bg-blue-200 rounded-lg bg-opacity-50'>{row._id}</span>
+              </td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">{row.employeeName}</td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">{row.employeeEmail}</td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">{row.employeePhone}</td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">{row.employeeRole}</td>
+              <td className="p-2 text-sm whitespace-nowrap text-gray-900">
+                <span className='p-1.5 text-xs font-medium uppercase tracking-wider
+                text-yellow-800 bg-yellow-200 rounded-lg bg-opacity-50'>{row.createdAt}</span>
+              </td>
+              <td className="p-2 text-sm text-gray-900 cursor-pointer" onClick={() => handleShowUpdate(row._id)}><MdEditSquare className='text-3xl text-green-700' /></td>
             </tr>
           ))}
         </tbody>
       </table>
+      </div>
       
      <div className='pagination'>
      <ReactPaginate
