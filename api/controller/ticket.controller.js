@@ -6,8 +6,12 @@ const errorHandler = require("../utils/errorHandler");
 
 
 const getTickets = async(req, res, next) => {
+
+    const loggedAdminId = req.user._id;
+
     try{
-        const tickets = await ticketModel.find().populate({path : "assignedTo", model : "Employee"});
+        const tickets = await ticketModel.find({'belongToAdmin._id' : loggedAdminId })
+         .populate({path : "assignedTo", model : "Employee"});
         res.status(200).json({
             success: true,
             message : "Tickets fetched successfully.",
