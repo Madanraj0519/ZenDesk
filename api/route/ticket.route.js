@@ -3,7 +3,7 @@ const { createTicket, getTickets, deleteTicket, assignEmployee, unAssignEmployee
 const ticketRoute = express.Router();
 
 ticketRoute.get('/', getTickets);
-ticketRoute.post('/create', createTicket);
+ticketRoute.post('/create/:adminId', createTicket);
 ticketRoute.post('/assign/:ticketId/employee/:employeeId', assignEmployee);
 ticketRoute.post('/unassign/:ticketId', unAssignEmployee);
 ticketRoute.delete('/delete/:id', deleteTicket);

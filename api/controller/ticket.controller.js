@@ -1,4 +1,5 @@
 const ticketModel = require("../model/ticket.model");
+const userModel = require("../model/user.model");
 const employeeModel = require("../model/employee.model");
 const errorHandler = require("../utils/errorHandler");
 
@@ -18,12 +19,26 @@ const getTickets = async(req, res, next) => {
 };
 
 const createTicket = async(req, res, next) => {
-    const { customerName, customerEmail, customerPhone, 
-        ticketTitle,ticketDescription  } = req.body;
+        const { customerName, customerEmail, customerPhone, 
+              ticketTitle,ticketDescription  } = req.body;
+        const { adminId } = req.params;
 
         try{
+            const admin = await userModel.findById(adminId);
+
+            if (!admin) {
+                return next(errorHandler(404, "Admin not found"));
+            }
+
+            const belongToAdmin = {
+                _id : admin._id,
+                userName : admin.userName,
+                userEmail : admin.userEmail,
+            };
+
             const ticket = new ticketModel({
-                customerName, customerEmail, customerPhone, ticketTitle, ticketDescription
+                customerName, customerEmail, customerPhone, 
+                ticketTitle, ticketDescription, belongToAdmin,
             });
 
             await ticket.save();

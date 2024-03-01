@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import AdminBoard from './pages/AdminBoard';
 import AdminProfile from './pages/AdminProfile';
 import AdminTicketList from './pages/AdminTicketList';
+import CreateTicketPage from './pages/CreateTicketPage';
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
          <Route path='/' element={<Home />} />
          <Route path='/register' element={<Register />} />
          <Route path='/login' element={<Login />} />
+         <Route path='/create-ticket' element={<CreateTicketPage />} />
          <Route path='/verify-email' element={<VerifyEmail />} />
 
          <Route element={<AdminPrivateRoute />}>

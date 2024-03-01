@@ -1,4 +1,5 @@
 const userModel = require('../model/user.model');
+const employeeModel = require('../model/employee.model');
 const bcrypt = require('bcryptjs');
 const errorHandler = require('../utils/errorHandler');
 const jwt = require('jsonwebtoken');
@@ -10,7 +11,22 @@ const createToken = (_id) => {
     const jwtSecretKey  = process.env.JWT_SECRET_KEY;
 
     return jwt.sign({_id}, jwtSecretKey);
-}
+};
+
+
+const getUsers = async(req, res, next) => {
+    try{
+        const users = await userModel.find();
+
+        res.status(200).json({
+            success: true,
+            message : "Users has been fetched successfully",
+            users,
+        });
+    }catch(err){
+        next(err);
+    };
+};
 
 const registerUser = async(req, res, next) => {
     const { userEmail, userName, userPhone, userJob,
@@ -114,6 +130,40 @@ const verifyEmail = async(req, res, next) => {
     }
 };
 
+const adminEmployeeData = async(req, res, next) => {
+
+    const adminId = "65e0ab5b1415a90ca1cf20ff";
+
+    try{
+         // Calculate employee counts by month, year, and weeks for admin-created employees
+         const adminEmployeeCounts = await employeeModel.aggregate([
+            {
+                $match : {
+                    'createdBy._id' : adminId,
+                },
+            },
+            {
+                $addFields : {
+                    week : { $week : '$createdAt'}
+                },
+            },
+            {
+                $group : {
+                    _id : {
+                        week : '$week',
+                    },
+                    week : { $first : '$week'},
+                }
+            },
+            { $project : { _id : 0}},
+         ]);
+
+         res.status(200).json(adminEmployeeCounts);
+    }catch(err){
+        next(err);
+    }
+};
+
 const signOut = (req, res, next) => {
     res.clearCookie('access_token')
     .status(200)
@@ -124,8 +174,10 @@ const signOut = (req, res, next) => {
 };
 
 module.exports = {
+    getUsers,
     registerUser,
     loginUser,
     verifyEmail,
+    adminEmployeeData,
     signOut,
 }

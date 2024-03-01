@@ -33,6 +33,11 @@ const ticketModel = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Employee'
     },
+    belongToAdmin : {
+        _id : { type : mongoose.Schema.Types.ObjectId },
+        userName : { type : String },
+        userEmail : { type : String },
+    }
 }, { timestamps : true });
 
 
