@@ -70,8 +70,8 @@ function DashboardSidebar() {
       ),
     },
     {
-      Name: "Fees Details",
-      links: "/dashboard/admin",
+      Name: "Tickets",
+      links: "/dashboard/employee/ticket",
       child: (
         <>
           <GiMoneyStack />

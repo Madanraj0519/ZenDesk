@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { MdEditSquare } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import { MdOutlineViewInAr } from "react-icons/md";
 import AssignEmployee from './AssignEmployee';

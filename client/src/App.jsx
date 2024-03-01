@@ -19,6 +19,7 @@ import AdminTicketList from './pages/AdminTicketList';
 import CreateTicketPage from './pages/CreateTicketPage';
 import EmployeeLogin from './pages/EmployeeLogin';
 import EmployeeProfilePage from './pages/EmployeeProfilePage';
+import EmployeeTicketList from './pages/EmployeeTicketList';
 
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
 
          <Route element={<EmployeePrivateRoute />}>
             <Route path='/dashboard/employee/profile' element={<EmployeeProfilePage />} />
+            <Route path='/dashboard/employee/ticket' element={<EmployeeTicketList />} />
          </Route>
 
        </Routes>

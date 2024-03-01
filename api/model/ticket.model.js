@@ -31,7 +31,7 @@ const ticketModel = new mongoose.Schema({
     },
     assignedTo : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'Employee'
+        ref : 'Employee',
     },
     belongToAdmin : {
         _id : { type : mongoose.Schema.Types.ObjectId },

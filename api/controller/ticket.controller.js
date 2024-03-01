@@ -22,6 +22,25 @@ const getTickets = async(req, res, next) => {
     };
 };
 
+const getTicketsAssignedWithEmployee = async(req, res, next) => {
+    const loggedEmployee = req.user._id;
+
+    try{
+        const tickets = await ticketModel.find({ assignedTo : loggedEmployee })
+        .populate({path : "assignedTo", model : "Employee"});
+
+        res.status(200).json({
+            success: true,
+            message : "Tickets assigned with employees has been fetched successfully.",
+            tickets,
+        });
+
+        // console.log(tickets);
+    }catch(err){
+        next(err);
+    }
+};
+
 const createTicket = async(req, res, next) => {
         const { customerName, customerEmail, customerPhone, 
               ticketTitle,ticketDescription  } = req.body;
@@ -56,6 +75,28 @@ const createTicket = async(req, res, next) => {
         }catch(err){
             next(err);
         }
+};
+
+const updateTicket = async(req, res, next) => {
+  const { ticketStatus } = req.body;
+  const { id } = req.params;
+  try{
+    const updateTicket = await ticketModel.findByIdAndUpdate(
+        id,
+        { ticketStatus : ticketStatus },
+        { new : true }
+    );
+    if(!updateTicket){
+        next(errorHandler(404, "Ticket not found"));
+    };
+    res.status(200).json({
+        success : true,
+        message : "Ticket updated successfully",
+        updateTicket,
+    });
+  } catch(err){
+    next(err);
+  } 
 };
 
 
@@ -153,7 +194,9 @@ const deleteTicket = async (req, res) => {
 module.exports = {
     getTickets,
     createTicket,
+    updateTicket,
     assignEmployee,
     unAssignEmployee,
     deleteTicket,
+    getTicketsAssignedWithEmployee,
 }
