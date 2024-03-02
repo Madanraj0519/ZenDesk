@@ -1,12 +1,40 @@
 import React from "react";
-import { FiMenu, FiX } from "react-icons/fi";
-import { IoMdLogOut } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector,} from "react-redux"
 import logo from "../images/zen-logo.png";
 import { FaBarsProgress } from "react-icons/fa6";
+import { FiX } from "react-icons/fi";
+import { IoLogInOutline } from "react-icons/io5";
+import { signOut } from "../redux/auth/userSlice";
+import { employeeSignOut } from "../redux/auth/employeeSlice";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function DashboardHeader({ showSidebar, handleToggleSidebar }) {
+
+  const dispatch = useDispatch();
+  const { currentUser} = useSelector((state) => state.user);
+  const {currentEmployee} = useSelector((state) => state.employee);
+
+  const handleUserSignOut = async() => {
+    try{
+      await fetch('/api/auth/signout');
+      // localStorage.removeItem('token');
+      dispatch(signOut());
+      toast.warning("Singed out")
+    }catch(err){
+      console.log(err);
+    }
+  };
+
+  const handleEmployeeSignOut = async() => {
+    try{
+      await fetch('/api/employee/employee-signout');
+      dispatch(employeeSignOut());
+      toast.warning("Singed out")
+    }catch(err){
+      console.log(err);
+    }
+  };
 
   return (
     <header className="flex justify-between items-center fixed w-full px-4 py-2  bg-green-700  h-16">
@@ -24,9 +52,22 @@ function DashboardHeader({ showSidebar, handleToggleSidebar }) {
             className="mr-0 -ml-4 h-8 lg:h-10 lg:mr-6 hidden md:block"
         />
       </div>
-      <div className="border-2 rounded-full m-2 p-4 ">
-       <h1>User</h1>
-      </div>
+
+      {
+        currentUser && (
+          <div className="text-4xl text-zinc-100 cursor-pointer" onClick={handleUserSignOut}>
+            <IoLogInOutline />
+          </div>
+        )
+      }
+
+     {
+        currentEmployee && (
+          <div className="text-4xl text-zinc-100 cursor-pointer" onClick={handleEmployeeSignOut}>
+            <IoLogInOutline />
+          </div>
+        )
+      }
     </header>
   );
 }

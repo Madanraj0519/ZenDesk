@@ -68,19 +68,6 @@ const Profile = () => {
     }
   }
 
-  const handleSignOut = async() => {
-    try{
-      await fetch('/api/auth/signout');
-      // localStorage.removeItem('token');
-      dispatch(signOut());
-      toast.warning("Singed out")
-    }catch(err){
-      console.log(err);
-    }
-  };
-
-
-
   return (
     <div className="flex flex-col justify-center items-center h-screen ">
     <div className="flex flex-col justify-center items-center">
@@ -240,7 +227,6 @@ const Profile = () => {
       </form>
       <div>
         <button onClick={handleDeleteAccount} className='cursor-pointer'>Delete account</button>
-        <button onClick={handleSignOut} className='cursor-pointer'>Sign out</button>
       </div>
     </div>
     </div>
