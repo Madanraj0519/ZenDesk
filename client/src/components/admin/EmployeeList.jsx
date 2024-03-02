@@ -45,10 +45,11 @@ const EmployeeList = () => {
   return (
     <>
     <div className="p-5 h-screen mt-16 w-full md:max-w-7xl">
-      <h1>Employee List</h1>
+    <h1 className='text-2xl font-semibold'>Employee List</h1>
+     <h2 className='text-zinc-600'>Dashboard/Add-Employee</h2>
       <div className='flex justify-end'>
         <button 
-         className="bg-green-800 mt-5 mb-3 hover:scale-110 duration-200 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
+         className="bg-green-800 mt-2 mb-2 hover:scale-110 duration-200 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
         onClick={() => setIsShow(true)}>Add Employee</button>
       </div>
     <div className='overflow-auto rounded-lg shadow-md'>

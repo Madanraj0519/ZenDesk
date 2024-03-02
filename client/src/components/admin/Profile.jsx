@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import {useDispatch, useSelector,} from "react-redux"
 import {updateUserStart, updateUserSuccess, updateUserFailure,
-        deleteUserStart, deleteUserSuccess, deleteUserFailure,
-        signOut} from "../../redux/auth/userSlice";
-import {Navigate, useNavigate} from "react-router-dom"
+        deleteUserStart, deleteUserSuccess, deleteUserFailure } from "../../redux/auth/userSlice";
+import {Link, Navigate, useNavigate} from "react-router-dom"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -68,48 +67,54 @@ const Profile = () => {
     }
   }
 
+  const userName = currentUser.restDetails.userName;
+  const firstTwoLetter = userName.slice(0,2);
+
   return (
-    <div className="flex flex-col justify-center items-center h-screen ">
-    <div className="flex flex-col justify-center items-center">
+  <div className="flex flex-col h-screen ">
+     <h1 className='text-2xl font-semibold mt-20'>Admin Profile</h1>
+     <h2 className='text-zinc-600'>Dashboard/Update-Profile</h2>
+    <div className="flex flex-col justify-center items-center mt-3">
       <form
         onSubmit={handleSubmit}
-        className="bg-slate-800 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 max-h-full"
+        className="bg-zinc-50 md:flex gap-10 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 max-h-full"
       >
-        <p className="text-gray-200 font-bold text-xl md:text-3xl mb-6 mt-4 lg:mt-0 flex justify-center">
-          Update Profile 
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className='flex-col justify-center items-center gap-5'>
+          <div className='w-40 h-40 border-4 border-zinc-300 shadow-md mb-3 ml-3'>
+            <h1 className='py-12 px-8 text-5xl h-full text-zinc-100 font-medium bg-red-500 uppercase'>{firstTwoLetter}</h1>
+          </div>
+          <span className='p-1.5 text-xs font-medium uppercase tracking-wider
+                  text-blue-800 bg-blue-200 rounded-lg bg-opacity-50'>{currentUser.restDetails._id}</span>
+        </div>
+        <div>
+          <h1 className='text-xl font-medium text-gray-500 mb-3'>Personal Information</h1>
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-8 ml-10">
           {/* <!-- Username field --> */}
-          <div className="col-span-1">
+          <div className="md:flex justify-end items-center gap-4">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-base font-bold"
               for="username"
             >
               Username
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
-              type="text"
-              id="userName"
-              name="userName"
-              placeholder="John Doe"
-              onChange={handleChange}
-              defaultValue={currentUser.restDetails.userName}
-            
+              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-b-gray-400 text-gray-900 focus:border-b-blue-900"
+              type="text" id="userName"
+              name="userName" placeholder="John Doe"
+              onChange={handleChange} defaultValue={currentUser.restDetails.userName}         
             />
           </div>
 
           {/* <!-- Mobile field --> */}
-          <div class="col-span-1">
+          <div class="md:flex justify-end items-center gap-4">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-base font-bold"
               for="mobile"
             >
               Mobile
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
+              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-b-gray-400 text-gray-900 focus:border-b-blue-900"
               type="tel"
               id="userPhone"
               name="userPhone"
@@ -121,15 +126,15 @@ const Profile = () => {
           </div>
 
           {/* <!-- Email field --> */}
-          <div class="col-span-1">
+          <div class="md:flex justify-end items-center gap-4">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-base font-bold"
               for="email"
             >
               Email
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
+              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-b-gray-400 text-gray-900 focus:border-b-blue-900"
               type="email"
               id="userEmail"
               name="userEmail"
@@ -140,15 +145,15 @@ const Profile = () => {
           </div>
 
    
-          <div class="col-span-1">
+          <div class="md:flex justify-end items-center gap-4">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-base font-bold"
               for="height"
             >
               Job
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
+              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-b-gray-400 text-gray-900 focus:border-b-blue-900"
               type="text"
               id="userJob"
               name="userJob"
@@ -159,15 +164,15 @@ const Profile = () => {
           </div>
 
     
-          <div class="col-span-1">
+          <div class="md:flex justify-end items-center gap-4">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-base font-bold"
               for="weight"
             >
               Company
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
+              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-b-gray-400 text-gray-900 focus:border-b-blue-900"
               type="text"
               id="userCompany"
               name="userCompany"
@@ -178,15 +183,15 @@ const Profile = () => {
           </div>
 
         
-          <div class="col-span-1">
+          <div class="md:flex justify-end items-center gap-4">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 whitespace-nowrap text-base font-bold"
               for="blood-group"
             >
                 No of employees
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
+              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-b-gray-400 text-gray-900 focus:border-b-blue-900"
               type="text"
               id="userEmployees"
               name="userEmployees"
@@ -195,34 +200,68 @@ const Profile = () => {
               defaultValue={currentUser.restDetails.userEmployees}
             />
           </div>
+          
+          {/* <!-- Submit button --> */}
+          <div className="flex gap-5">
+              <Link to={'/dashboard/admin'}>
+              <button
+               className="bg-zinc-400 hover:scale-110 duration-200 hover:bg-zinc-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >Cancel</button>
+              </Link>
+              <button
+               className="bg-green-700 hover:scale-110 duration-200 hover:bg-green-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+               type="submit"
+             >Update</button>
+            </div>         
+        </div>
 
-         
-          <div class="col-span-1">
+        <h1 className='text-xl font-medium text-gray-500 mt-5 mb-3'>Change Password</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ml-10">
+            <div class="md:flex justify-end items-center gap-4">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 whitespace-nowrap text-base font-bold"
               for="health-issues"
             >
               Change password
             </label>
             <input
-              className="border-transparent border-2  focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 w-full rounded-lg focus:outline-none focus:shadow-outline"
+              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-b-gray-400 text-gray-900 focus:border-b-blue-900"
+              id="userPassword"
+              type='text'
+              name="userPassword"
+              placeholder="Enter your password"
+            ></input>
+            </div>
+            
+            <div class="md:flex justify-end items-center gap-4">
+            <label
+              class="block text-zinc-600 whitespace-nowrap text-base font-bold"
+              for="health-issues"
+            >
+              Confirm password
+            </label>
+            <input
+              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-b-gray-400 text-gray-900 focus:border-b-blue-900"
               id="userPassword"
               type='text'
               name="userPassword"
               onChange={handleChange}
               placeholder="Enter your password"
             ></input>
-          </div>
-
+            </div>
+            {/* <!-- Submit button --> */}
+            <div className="flex gap-5">
+            <Link to={'/dashboard/admin'}>
+              <button
+               className="bg-zinc-400 hover:scale-110 duration-200 hover:bg-zinc-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >Cancel</button>
+              </Link>
+              <button
+               className="bg-green-700 hover:scale-110 duration-200 hover:bg-green-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+               type="submit"
+             >Update</button>
+            </div>
         </div>
-        {/* <!-- Submit button --> */}
-        <div className="flex justify-center items-center">
-          <button
-            className="bg-green-700 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-800 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Update
-          </button>
         </div>
       </form>
       <div>

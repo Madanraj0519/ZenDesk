@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { MdDeleteForever } from "react-icons/md";
 import { MdOutlineViewInAr } from "react-icons/md";
 import AssignEmployee from './AssignEmployee';
+import {useSelector} from "react-redux"
 
 const TicketList = () => {
 
@@ -14,6 +15,8 @@ const TicketList = () => {
   const [isShow, setIsShow] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
   const [defaultData, setDefaultData] = useState(undefined);
+
+  const { currentUser} = useSelector((state) => state.user);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -62,12 +65,13 @@ const TicketList = () => {
     }
   };
 
-  // console.log(defaultData);
+  console.log(defaultData);
 
   return (
     <>
     <div className="p-5 h-screen mt-20 w-full md:max-w-7xl">
-      <h1>Ticket List</h1>
+     <h1 className='text-2xl font-semibold'>Ticket List</h1>
+     <h2 className='text-zinc-600'>Dashboard/Tickets belongs to {currentUser.restDetails.userCompany}</h2>
       <div className='overflow-auto rounded-lg shadow-md'>
        <table className="w-full">
         <thead className='bg-slate-800 border-b-2 border-gray-700'>
@@ -135,8 +139,8 @@ const TicketList = () => {
 
     {
       isShow && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 z-50  bg-opacity-90 flex flex-col items-center justify-center min-h-screen bg-zinc-900">
-        <div className="relative lg:w-3/5 h-700 bg-slate-300 rounded-xl shadow-md p-8">
+      <div className="fixed top-0 left-0 right-0 bottom-0 z-50  bg-opacity-90 flex flex-col items-center justify-center min-h-screen bg-zinc-900">
+        <div className="relative lg:w-3/5 h-700 rounded-xl shadow-md p-8">
             <button
               className="absolute top-0 right-0 mt-4 mr-4 rounded-full p-2 bg-gray-800 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600"
               onClick={() => setIsShow(false)}
@@ -156,151 +160,178 @@ const TicketList = () => {
                 />
               </svg>
             </button>
-            <form
-        className="bg-slate-800 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 max-h-full"
-      >
-        <p className="text-gray-200 font-bold text-xl md:text-3xl mb-6 mt-4 lg:mt-0 flex justify-center">
-          Tickets
-        </p>
+        <div className='md:flex justify-between gap-5'>
+          <form className="bg-zinc-50 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 max-h-full">
+             <p className="text-gray-900 font-bold text-xl md:text-3xl mb-6 mt-4 lg:mt-0 flex justify-center">
+               Ticket Detail
+             </p>
+             <div className="grid grid-cols-1 gap-6">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* <!-- Username field --> */}
-          <div className="col-span-1">
+          <div className='md:flex justify-between items-center gap-3'>
+            <div>
+            <span className='p-1.5 text-xs font-medium uppercase tracking-wider
+             text-blue-800 bg-blue-200 rounded-lg bg-opacity-50'>{defaultData._id}</span>
+            </div>
+            <div className='p-1.5 text-xs font-medium uppercase tracking-wider
+             text-yellow-800 bg-yellow-200 rounded-lg bg-opacity-50'>Created At : {defaultData.createdAt} </div>
+          </div>
+
+          <div class="md:flex justify-end items-center gap-2">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-gray-700 text-lg whitespace-nowrap font-bold"
+              for="health-issues"
+            >
+              Status : 
+            </label>
+            <h2 className={`p-1.5 text-xs font-medium uppercase tracking-wider rounded-lg bg-opacity-50
+             ${ defaultData.ticketStatus === "Resolved" ? "text-green-800 bg-green-200"
+            : defaultData.ticketStatus === "Rejected" ? "text-red-800 bg-red-200" : "text-gray-800 bg-gray-200"}`}
+              >{defaultData.ticketStatus}</h2>
+          </div>
+
+          {/* <!-- Username field --> */}
+          <div className="md:flex justify-end items-center gap-2">
+            <label
+              class="block text-gray-700 text-lg whitespace-nowrap font-bold"
               for="username"
             >
-              Username
+              Username :
             </label>
             <input
-              className=" w-full bg-transparent outline-none px-2 py-1 border-b-2 border-white text-white"
+              className="w-full rounded-md outline-none px-2 py-1 border-b-2 text-base border-white text-gray-900"
               type="text"
               id="employeeName"
               name="employeeName"
               placeholder="John Doe"
               defaultValue={defaultData.customerName}
-              // onChange={handleChange}
+              disabled
             />
           </div>
 
           {/* <!-- Mobile field --> */}
-          <div class="col-span-1">
+          <div class="md:flex justify-end items-center gap-2">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-gray-700 text-lg whitespace-nowrap font-bold"
               for="mobile"
             >
-              Mobile
+              Mobile : 
             </label>
             <input
-              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-white text-white"
+              className="w-full rounded-md outline-none px-2 py-1 border-b-2 text-base border-white text-gray-900"
               type="tel"
               id="employeePhone"
               name="employeePhone"
               placeholder="9876543210"
+              disabled
               defaultValue={defaultData.customerPhone}
             />
           </div>
 
           {/* <!-- Email field --> */}
-          <div class="col-span-1">
+          <div class="md:flex justify-end items-center gap-2">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-gray-700 text-lg whitespace-nowrap font-bold"
               for="email"
             >
-              Email
+              Email : 
             </label>
             <input
-              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-white text-white"
+              className="w-full  rounded-md outline-none px-2 py-1 border-b-2 text-base border-white text-gray-900"
               type="email"
               id="employeeEmail"
               name="employeeEmail"
               defaultValue={defaultData.customerEmail}
               placeholder="john.doe@example.com"
-            />
-          </div>
-
-   
-          <div class="col-span-1">
-            <label
-              class="block text-gray-200 text-sm font-bold mb-3"
-              for="height"
-            >
-              Ticket Id
-            </label>
-            <input
-              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-white text-white"
-              type="text"
-              id="employeeRole"
-              name="employeeRole"
-              defaultValue={defaultData._id}
-              placeholder="Software developer"
+              disabled
             />
           </div>
          
-          <div class="col-span-1">
+          <div class="md:flex justify-end items-center gap-2">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-gray-700 text-lg whitespace-nowrap font-bold"
               for="health-issues"
             >
-              Ticket Title
+              Ticket Title : 
             </label>
             <input
-              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-white text-white"
+              className="w-full rounded-md outline-none px-2 py-1 border-b-2 text-base border-white text-gray-900"
               id="employeePassword"
               type='text'
               name="employeePassword"
               defaultValue={defaultData.ticketTitle}
               placeholder="Enter your password"
+              disabled
             ></input>
           </div>
 
-          <div class="col-span-1">
+          <div class="md:flex justify-end items-center gap-2">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-gray-700 text-lg whitespace-nowrap font-bold"
               for="health-issues"
             >
-              Ticket Description
+              Ticket Description : 
             </label>
-            <input
-              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-white text-white"
-              id="employeePassword"
-              type='text'
-              name="employeePassword"
-              defaultValue={defaultData.ticketDescription}
-              placeholder="Enter your password"
-            ></input>
+            <p className='w-full rounded-md outline-none px-2 py-1 border-b-2 text-base border-white text-gray-900'>{defaultData.ticketDescription}</p>
           </div>
 
-          <div class="col-span-1">
-            <label
-              class="block text-gray-200 text-sm font-bold mb-3"
-              for="health-issues"
-            >
-              Status
-            </label>
-            <input
-              className="w-full bg-transparent outline-none px-2 py-1 border-b-2 border-white text-white"
-              id="employeePassword"
-              type='text'
-              name="employeePassword"
-              defaultValue={defaultData.ticketStatus}
-              placeholder="Enter your password"
-            ></input>
-          </div>
+             </div>
+          </form>
+          <div>
+            <form className="bg-zinc-50 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 max-h-full">
+             <p className="text-gray-900 font-bold text-xl md:text-3xl mb-6 mt-4 lg:mt-0 flex justify-center">
+                  Assigned To</p>
+           <div className="grid grid-cols-1 gap-6">
 
-        </div>
-        {/* <!-- Submit button --> */}
-        <div className="flex justify-center items-center">
-          <button
-            className="bg-green-700 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-800 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Create
-          </button>
-        </div>
-      </form>
+          <div className='md:flex justify-between items-center gap-2'>
+            <div>
+            <span className='p-1.5 text-xs font-medium uppercase tracking-wider
+             text-blue-800 bg-blue-200 rounded-lg bg-opacity-50'>{defaultData.assignedTo._id}</span>
             </div>
-    </div>
+          </div>
+            {/* <!-- Username field --> */}
+          <div className="md:flex justify-end items-center gap-2">
+            <label
+              class="block text-gray-700 text-lg whitespace-nowrap font-bold"
+              for="username"
+            >
+              Username :
+            </label>
+            <input
+              className="w-full rounded-md outline-none px-2 py-1 border-b-2 text-base border-white text-gray-900"
+              type="text"
+              id="employeeName"
+              name="employeeName"
+              placeholder="John Doe"
+              defaultValue={defaultData.assignedTo.employeeName}
+              disabled
+            />
+          </div>
+
+          {/* <!-- Email field --> */}
+          <div class="md:flex justify-end items-center gap-2">
+            <label
+              class="block text-gray-700 text-lg whitespace-nowrap font-bold"
+              for="email"
+            >
+              Email : 
+            </label>
+            <input
+              className="w-full  rounded-md outline-none px-2 py-1 border-b-2 text-base border-white text-gray-900"
+              type="email"
+              id="employeeEmail"
+              name="employeeEmail"
+              defaultValue={defaultData.assignedTo.employeeEmail}
+              placeholder="john.doe@example.com"
+              disabled
+            />
+          </div>
+
+        </div>
+        </form>
+             </div>
+            </div>
+      </div>
+     </div>
       )
     }
    </>

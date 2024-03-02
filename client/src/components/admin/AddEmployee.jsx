@@ -61,23 +61,23 @@ const AddEmployee = ({setIsShow}) => {
             </button>
             <form
         onSubmit={handleSubmit}
-        className="bg-slate-800 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 max-h-full"
+        className="bg-zinc-50 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 max-h-full"
       >
-        <p className="text-gray-200 font-bold text-xl md:text-3xl mb-6 mt-4 lg:mt-0 flex justify-center">
+        <p className="text-gray-900 font-bold text-xl md:text-3xl mb-6 mt-4 lg:mt-0 flex justify-center">
           Add Employee
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* <!-- Username field --> */}
           <div className="col-span-1">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-sm font-bold mb-3"
               for="username"
             >
               Username
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
+              className="border-transparent border-2 w-full focus:border-gray-800 bg-zinc-200 text-gray-900 border-gray-400 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
               type="text"
               id="employeeName"
               name="employeeName"
@@ -89,13 +89,13 @@ const AddEmployee = ({setIsShow}) => {
           {/* <!-- Mobile field --> */}
           <div class="col-span-1">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-sm font-bold mb-3"
               for="mobile"
             >
               Mobile
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
+              className="border-transparent border-2 w-full focus:border-gray-800 bg-zinc-200 text-gray-900 border-gray-400 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
               type="tel"
               id="employeePhone"
               name="employeePhone"
@@ -107,13 +107,13 @@ const AddEmployee = ({setIsShow}) => {
           {/* <!-- Email field --> */}
           <div class="col-span-1">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-sm font-bold mb-3"
               for="email"
             >
               Email
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
+              className="border-transparent border-2 w-full focus:border-gray-800 bg-zinc-200 text-gray-900 border-gray-400 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
               type="email"
               id="employeeEmail"
               name="employeeEmail"
@@ -125,13 +125,13 @@ const AddEmployee = ({setIsShow}) => {
    
           <div class="col-span-1">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-sm font-bold mb-3"
               for="height"
             >
               Role
             </label>
             <input
-              className="border-transparent border-2 w-full focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
+              className="border-transparent border-2 w-full focus:border-gray-800 bg-zinc-200 text-gray-900 border-gray-400 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
               type="text"
               id="employeeRole"
               name="employeeRole"
@@ -142,13 +142,13 @@ const AddEmployee = ({setIsShow}) => {
          
           <div class="col-span-1">
             <label
-              class="block text-gray-200 text-sm font-bold mb-3"
+              class="block text-zinc-600 text-sm font-bold mb-3"
               for="health-issues"
             >
               create password
             </label>
             <input
-              className="border-transparent border-2  focus:border-green-500 bg-slate-700 text-white border-gray-200 px-2 py-1 w-full rounded-lg focus:outline-none focus:shadow-outline"
+              className="border-transparent border-2 w-full focus:border-gray-800 bg-zinc-200 text-gray-900 border-gray-400 px-2 py-1 rounded-lg focus:outline-none focus:shadow-outline"
               id="employeePassword"
               type='text'
               name="employeePassword"
@@ -159,7 +159,7 @@ const AddEmployee = ({setIsShow}) => {
 
         </div>
         {/* <!-- Submit button --> */}
-        <div className="flex justify-center items-center">
+        <div className="flex justify-end items-center">
           <button
             className="bg-green-700 mt-8 mb-3 hover:scale-110 duration-200 hover:bg-green-800 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
             type="submit"

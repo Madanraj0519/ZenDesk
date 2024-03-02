@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate';
 import { MdOutlineViewInAr } from "react-icons/md";
 import ResolvedQuery from './ResolvedQuery';
+import {useSelector} from "react-redux"
 
 
 const EmployeeTicket = () => {
@@ -11,6 +12,8 @@ const EmployeeTicket = () => {
   const [ ticketData, setTicketData ] = useState([]);
   const [defaultData, setDefaultData ] = useState(undefined);
   const [isShow, setIsShow] = useState(false);
+
+  const {currentEmployee} = useSelector((state) => state.employee);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -43,7 +46,8 @@ const EmployeeTicket = () => {
   return (
     <>
     <div className="p-5 h-screen mt-20 w-full md:max-w-7xl">
-     <h1>Tickets Assigned to Employee</h1>
+     <h1 className='text-2xl font-semibold'>Ticket List</h1>
+      <h2 className='text-zinc-600'>Dashboard/Tickets Assigned to {currentEmployee.restDetails.employeeName}</h2>
      <div className='overflow-auto rounded-lg shadow-md'>
        <table className="w-full">
         <thead className='bg-slate-800 border-b-2 border-gray-700'>
