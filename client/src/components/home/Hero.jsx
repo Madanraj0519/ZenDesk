@@ -14,8 +14,10 @@ const Hero = () => {
                     <button className='bg-fuchsia-800 px-4 py-2 text-zinc-100 
              font-poppins font-medium text-lg rounded-full'>Start your free trial</button>
                     </Link>
+                    <Link to={'/login'}>
                     <button className='px-4 py-2 text-zinc-900 border-2 border-zinc-900
-             font-poppins font-medium text-lg rounded-full'>View demo</button>
+             font-poppins font-medium text-lg rounded-full'>Sign In</button>
+                    </Link>
                 </div>
             </div>
             <div className='cursor-pointer'>

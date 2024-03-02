@@ -20,6 +20,7 @@ import CreateTicketPage from './pages/CreateTicketPage';
 import EmployeeLogin from './pages/EmployeeLogin';
 import EmployeeProfilePage from './pages/EmployeeProfilePage';
 import EmployeeTicketList from './pages/EmployeeTicketList';
+import AdminLogin from './pages/AdminLogin';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
          <Route path='/' element={<Home />} />
          <Route path='/register' element={<Register />} />
          <Route path='/login' element={<Login />} />
+         <Route path='/admin-login' element={<AdminLogin />} />
          <Route path='/employee-login' element={<EmployeeLogin />} />
          <Route path='/create-ticket' element={<CreateTicketPage />} />
          <Route path='/verify-email' element={<VerifyEmail />} />
