@@ -25,11 +25,10 @@ const getEmployee = async(req, res, next) => {
 
         res.status(200).json({
             success:false,
-            message : "Employee has been fetched successfully",
+            message : "Employee data has been fetched successfully",
             employees : employee
         });
 
-        // console.log(employee);
     }catch(err){
         next(err);
     }
@@ -39,10 +38,9 @@ const createEmployee = async (req, res, next) => {
 
     const { employeeEmail, employeeName, employeePhone, employeePassword, employeeRole } = req.body;
     const adminId = req.user._id;
-    // console.log("crete:",createdBy);
 
     try {
-        let admin = await userModel.findById({_id : adminId});     // console.log("admin:", admin);
+        let admin = await userModel.findById({_id : adminId}); 
 
         if (!admin) {
             return next(errorHandler(404, "Admin not found"));
@@ -58,7 +56,7 @@ const createEmployee = async (req, res, next) => {
             return next(errorHandler(400, 'Employee with this email already exists'));
         }
 
-        const hashPassword = bcrypt.hashSync(employeePassword, 10); // 10 is the salt rounds
+        const hashPassword = bcrypt.hashSync(employeePassword, 10); 
         employee = new employeeModel({
             employeeEmail, employeeName, employeePhone,
             employeePassword: hashPassword, employeeRole,
@@ -66,8 +64,6 @@ const createEmployee = async (req, res, next) => {
         });
 
         await employee.save();
-
-        // console.log(employee);
 
         const token = createToken(employee._id);
 
@@ -108,7 +104,7 @@ const loginEmployee = async (req, res, next) => {
         .status(200)
         .json({
             success: true,
-            message: `Welcome back ${restDetails.employeeName}, `,
+            message: `Welcome, ${restDetails.employeeName}, `,
             restDetails,
             token,
         })
@@ -120,10 +116,6 @@ const loginEmployee = async (req, res, next) => {
 
 const updateEmployee = async(req, res, next) => {
     
-    // if(req.user._id !== req.params.id){
-    //     return next(errorHandler(401, 'you can update only your account!'));
-    // }
-
     try{
         if(req.body.employeePassword){
             req.body.employeePassword = bcrypt.hashSync(req.body.employeePassword, 10);
@@ -146,7 +138,7 @@ const updateEmployee = async(req, res, next) => {
         res.status(200)
         .json({
             success : true,
-            message : "Employee updated successfully",
+            message : "Employee data updated successfully",
             restDetails
         });
     }catch(err){
@@ -156,10 +148,6 @@ const updateEmployee = async(req, res, next) => {
 
 const deleteEmployee = async(req, res, next) => {
     
-    // if (req.user._id !== req.params.id) {
-    //     return next(errorHandler(401, 'You can delete only your account!'));
-    //   }
-
     try{
         await employeeModel.findByIdAndDelete(req.params.id);
         res.status(200).

@@ -16,15 +16,6 @@ function DashboardSidebar({handleToggleSidebar}) {
 
   const Admin = currentUser ? [
     {
-      Name: "Admin Profile",
-      links: "/dashboard/admin/profile",
-      child: (
-        <>
-          <FaUser />
-        </>
-      ),
-    },
-    {
       Name: "Admin Dashboard",
       links: "/dashboard/admin",
       child: (
@@ -42,17 +33,18 @@ function DashboardSidebar({handleToggleSidebar}) {
         </>
       ),
     },
-  ] : 
-  [
     {
-      Name: "Employee Profile",
-      links: "/dashboard/employee/profile",
+      Name: "Admin Profile",
+      links: "/dashboard/admin/profile",
       child: (
         <>
           <FaUser />
         </>
       ),
     },
+  ]
+   : 
+  [
     {
       Name: "Tickets",
       links: "/dashboard/employee/ticket",
@@ -62,15 +54,15 @@ function DashboardSidebar({handleToggleSidebar}) {
         </>
       ),
     },
-    // {
-    //   Name: "Attendance",
-    //   links: "/dashboard/admin/ticket",
-    //   child: (
-    //     <>
-    //       <FaCalendarAlt />
-    //     </>
-    //   ),
-    // },
+    {
+      Name: "Employee Profile",
+      links: "/dashboard/employee/profile",
+      child: (
+        <>
+          <FaUser />
+        </>
+      ),
+    },
   ] 
 
   return (

@@ -1,6 +1,5 @@
 import React from 'react';
 import DashboardSidebar from '../features/DashboardSidebar';
-// import '../style/dashboard.css';
 
 const Dashboard = () => {
     return (

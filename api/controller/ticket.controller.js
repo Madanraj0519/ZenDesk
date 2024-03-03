@@ -14,7 +14,7 @@ const getTickets = async(req, res, next) => {
          .populate({path : "assignedTo", model : "Employee"});
         res.status(200).json({
             success: true,
-            message : "Tickets fetched successfully.",
+            message : "Tickets data has been fetched successfully.",
             tickets,
         });
     }catch(err){
@@ -35,7 +35,6 @@ const getTicketsAssignedWithEmployee = async(req, res, next) => {
             tickets,
         });
 
-        // console.log(tickets);
     }catch(err){
         next(err);
     }
@@ -76,6 +75,7 @@ const createTicket = async(req, res, next) => {
             next(err);
         }
 };
+
 
 const updateTicket = async(req, res, next) => {
   const { ticketStatus } = req.body;
@@ -146,6 +146,7 @@ const assignEmployee = async(req, res, next) => {
     });
 };
 
+
 const unAssignEmployee = async(req, res, next) => {
     const {ticketId} = req.params;
 
@@ -184,7 +185,7 @@ const deleteTicket = async (req, res) => {
       res.status(200).
       json({
           success : true,
-          message : "Your tickets has been deleted successfully",
+          message : "Ticket has been deleted successfully",
       })
     } catch (err) {
       next(err);

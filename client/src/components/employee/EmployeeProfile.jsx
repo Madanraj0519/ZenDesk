@@ -13,7 +13,6 @@ const EmployeeProfile = () => {
   const [updatedData, setUpdatedData] = useState({});
   const {currentEmployee} = useSelector((state) => state.employee);
 
-  // console.log("currentEmployee :", currentEmployee.restDetails);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -30,14 +29,13 @@ const EmployeeProfile = () => {
       if(data.success === false) {
         dispatch(updateEmployeeFailure(data));
         toast.error(data.message);
-        console.log(data.message);
+      }else{
+        dispatch(updateEmployeeSuccess(data));
+        toast.success(data.message);
       }
-      dispatch(updateEmployeeSuccess(data));
-      toast.success(data.message);
     }catch(err){
       dispatch(updateEmployeeFailure(e));
       toast.error("Something went wrong");
-      console.log(e);
     };
   };
 

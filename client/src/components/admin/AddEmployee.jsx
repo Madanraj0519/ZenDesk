@@ -25,12 +25,12 @@ const AddEmployee = ({setIsShow}) => {
           body: JSON.stringify(formData)
         });
         const data = await res.json();
-        // console.log(data);
         if(data.success === false) {
         toast.error(data.message);
+        }else{
+          toast.success(data.message);
+          setTimeout(() => {window.location.reload()}, 3000);
         }
-        toast.success(data.message);
-        setIsShow(false)
       }catch(err){
         toast.error("Something went wrong");
       }

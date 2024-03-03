@@ -34,15 +34,11 @@ const EmployeeTicket = () => {
     fetchEmployees();
   }, []);
 
-  // console.log(ticketData);
-
   const handleShowUpdate = (id) => {
     setIsShow(true);
     const data = ticketData.filter((data) => data._id === id);
     setDefaultData(data[0]);
   };
-
-  // console.log(defaultData);
 
   return (
     <>

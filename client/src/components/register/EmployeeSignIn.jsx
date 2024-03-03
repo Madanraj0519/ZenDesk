@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInEmployeeStart, signInEmployeeSuccess, signInEmployeeFailure} from "../../redux/auth/employeeSlice"
+import { signInEmployeeStart, signInEmployeeSuccess, signInEmployeeFailure} from "../../redux/auth/employeeSlice";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EmployeeSignIn = () => {
 
@@ -9,8 +11,6 @@ const EmployeeSignIn = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { currentEmployee } = useSelector((state) => state.employee);
-
-    // console.log(currentEmployee);
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -24,19 +24,17 @@ const EmployeeSignIn = () => {
                 body: JSON.stringify(formData),
               });
             const data = await res.json();
-            // console.log(data);
             if(data.success === false){
                 dispatch(signInEmployeeFailure(data));
-                // toast.error(data.message);
-                console.log(data.message);
+                toast.error(data.message);
             }else{
                 navigate('/dashboard/employee/profile');
                 dispatch(signInEmployeeSuccess(data));
-                // toast.success(data.message);
+                toast.success(data.message);
               }
         }catch(err){
             dispatch(signInFailure(err));
-            // toast.error("Something went wrong");
+            toast.error("Something went wrong");
         }
     };
 

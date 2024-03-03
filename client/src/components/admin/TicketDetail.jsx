@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TicketDetail = ({defaultData, setIsShow}) => {
   return (

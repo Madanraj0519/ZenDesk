@@ -49,7 +49,7 @@ const registerUser = async(req, res, next) => {
                 res.status(200).
                  json({
                     success : true,
-                    message : 'Verification email has been sent to your box successfully',
+                    message : 'Verification email has been sent to your Inbox, Check out!!!',
                     user,
                     token,
                 });
@@ -82,7 +82,7 @@ const loginUser = async (req, res, next) => {
         .status(200)
         .json({
             success: true,
-            message: `Welcome back ${restDetails.userName}, `,
+            message: `Welcome, ${restDetails.userName}!!, `,
             restDetails,
             token,
         })
@@ -116,7 +116,7 @@ const verifyEmail = async(req, res, next) => {
             .status(200)
             .json({
                 success: true,
-                message : "Email verified successfully",
+                message : "Email verified successfully, Login and Enjoy!",
                 _id : user._id,
                 userEmail : user.userEmail,
                 token,

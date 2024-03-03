@@ -29,7 +29,6 @@ const EmployeeList = () => {
         const res = await fetch('/api/employee/');
         const data = await res.json();
         setEmployeeData(data.employees);
-        // console.log(data.employees);
     };
 
     fetchEmployees();
@@ -40,8 +39,6 @@ const EmployeeList = () => {
     const data = employeeData.filter((data) => data._id === id);
     setDefaultData(data[0]);
   }
-
-  // console.log(currentPageData);
 
 
   return (

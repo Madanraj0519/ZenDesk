@@ -3,10 +3,14 @@ import ReactPaginate from 'react-paginate';
 import {Link}from "react-router-dom"
 import { MdDeleteForever } from "react-icons/md";
 import { MdOutlineViewInAr } from "react-icons/md";
-import AssignEmployee from './AssignEmployee';
 import {useSelector} from "react-redux";
-import TicketDetail from './TicketDetail';
 import { IoMdInformationCircle } from "react-icons/io";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import AssignEmployee from './AssignEmployee';
+import TicketDetail from './TicketDetail';
+
 
 const TicketList = () => {
 
@@ -36,7 +40,6 @@ const TicketList = () => {
         const res = await fetch('/api/ticket/');
         const data = await res.json();
         setTicketData(data.tickets);
-        // console.log(data);
     };
     fetchTickets();
 
@@ -46,7 +49,6 @@ const TicketList = () => {
     setIsShow(true);
     const data = ticketData.filter((data) => data._id === id);
     setDefaultData(data[0]);
-    // console.log(data[0]);
   }
 
   const handleDelete = async(id) => {
@@ -56,19 +58,16 @@ const TicketList = () => {
       });
       const data = await res.json();
       if(data.success === false){
-        // toast.error(data.message);
-        console.log(data.message);
+        toast.error(data.message);
+      }else{
+        toast.warning(data.message);
+        setTimeout(() => { window.location.reload()}, 2000);
       }
-      // toast.warning(data.message);
-      console.log(data.message);
-      setTimeout(() => { window.location.reload()}, 2000);
     }catch(err){
-      // toast.error(err.message);
-      console.log(err.message);
+      toast.error("Something went wrong");
     }
   };
 
-  console.log(defaultData);
 
   return (
     <>

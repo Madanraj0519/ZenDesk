@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import ticket from "../../images/ticket-logo.png"
+import ticket from "../../images/ticket-logo.png";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateTicket = () => {
 
@@ -12,7 +14,6 @@ const CreateTicket = () => {
             const res = await fetch(`/api/auth/`);
             const data = await res.json();
             setAdminData(data.users);
-            // console.log(adminData);
         };
         fetchAdmins();
     }, []);
@@ -28,15 +29,13 @@ const CreateTicket = () => {
               body: JSON.stringify(formData)
             });
             const data = await res.json();
-            console.log(data);
             if(data.success === false) {
-            // toast.error(data.message);
-              console.log(data);
+            toast.error(data.message);
+            }else{
+              toast.success(data.message);
             }
-            // toast.success(data.message);
           }catch(err){
-            // toast.error("Something went wrong");
-             console.log(err.message);
+            toast.error("Something went wrong");
           }
     };
 

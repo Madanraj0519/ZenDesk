@@ -33,17 +33,14 @@ const Profile = () => {
       if(data.success === false) {
         dispatch(updateUserFailure(data));
         toast.error(data.message);
-        console.log(data.message);
+      }else{
+        dispatch(updateUserSuccess(data));
+        toast.success(data.message);
       }
-      dispatch(updateUserSuccess(data));
-      toast.success(data.message);
     }catch(e){
       dispatch(updateUserFailure(e));
       toast.error("Something went wrong");
-      console.log(e);
     };
-
-    // console.log(currentUser);
   };
 
   const handleDeleteAccount = async() => {
@@ -57,10 +54,11 @@ const Profile = () => {
         dispatch(deleteUserFailure());
         toast.error(data.message);
         return;
+      }else{
+        dispatch(deleteUserSuccess(data));
+        navigate('/register');
+        toast.error(data.message);
       }
-      dispatch(deleteUserSuccess(data));
-      navigate('/register');
-      toast.error(data.message);
     }catch(err){
       dispatch(deleteUserFailure(err));
       toast.error("Something went wrong");

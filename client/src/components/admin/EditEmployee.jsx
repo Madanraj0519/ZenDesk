@@ -29,7 +29,7 @@ const EditEmployee = ({setShowUpdate, defaultData}) => {
        toast.error(data.message);
       }
       toast.success(data.message);
-      setShowUpdate(false)
+      setTimeout(() => {window.location.reload()}, 3000);
     }catch(e){
       toast.error("Something went wrong");
     };
@@ -43,9 +43,10 @@ const EditEmployee = ({setShowUpdate, defaultData}) => {
       const data = await res.json();
       if(data.success === false){
         toast.error(data.message);
+      }else{
+        toast.warning(data.message);
+      setTimeout(() => {window.location.reload()}, 3000);
       }
-      toast.warning(data.message);
-      setShowUpdate(false)
     }catch(err){
       toast.error(err.message);
     }

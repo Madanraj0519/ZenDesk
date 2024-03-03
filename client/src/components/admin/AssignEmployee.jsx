@@ -1,4 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const AssignEmployee = ({ticketId, isAssigned}) => {
 
@@ -9,7 +12,6 @@ const AssignEmployee = ({ticketId, isAssigned}) => {
         const res = await fetch('/api/employee/');
         const data = await res.json();
         setEmployeeData(data.employees);
-        // console.log(data.employees);
     };
     fetchEmployees();
   }, []);
@@ -26,12 +28,13 @@ const AssignEmployee = ({ticketId, isAssigned}) => {
       });
       const data = await res.json();
       if(data.success === false){
-        console.log(data.message);
+        toast.error(data.message);
+      }else{
+        toast.success(data);
+        setTimeout(() => { window.location.reload()}, 3000);
       }
-      console.log(data);
-      setTimeout(() => { window.location.reload()}, 2000);
      }catch(err){
-      console.log(data);
+      toast.error("Something went wrong");
      };
   }
 

@@ -44,13 +44,11 @@ const SignUp = () => {
           body: JSON.stringify(formData)
         });
         const data = await res.json();
-        // console.log(data);
         if(data.success === false) {
           dispatch(signInFailure(data.message));
           toast.error(data.message);
         }
 
-        // localStorage.setItem("User", JSON.stringify(data));
         dispatch(signInSuccess(data));
         navigate('/verify-email');
         toast.info(data.message);

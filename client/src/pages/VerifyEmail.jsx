@@ -44,11 +44,10 @@ const VerifyEmail = () => {
           if(data.success === false){
             dispatch(signInFailure(data.message));
             toast.error(data.message);
+          }else{
+            dispatch(signInSuccess(data));
+            toast.success(data.message);
           }
-
-          // localStorage.setItem("User", JSON.stringify(data));
-          dispatch(signInSuccess(data));
-          toast.success(data.message);
         }
       }
     })();

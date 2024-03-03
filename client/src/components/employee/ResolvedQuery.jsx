@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ResolvedQuery = ({defaultData, setIsShow}) => {
 
     const [selectedValue, setSelectedValue] = useState(defaultData.ticketStatus);
-    const handleChange = () => {};
+    // const handleChange = () => {};
     const handleUpdate = async(e) => {
         e.preventDefault();
         try{
@@ -18,16 +20,16 @@ const ResolvedQuery = ({defaultData, setIsShow}) => {
             });
             const data = await res.json();
             if(data.success === false){
-                console.log(data);
+                toast.error(data);
+            }else{
+              setTimeout(() => { window.location.reload();}, 3000)
+              toast.success(data);
             }
-            setTimeout(() => { window.location.reload();}, 3000)
-            console.log(data);
         }catch(err){
-            console.error(err);
+            toast.error("Something went wrong");
         }
     };
 
-    // console.log(defaultData);
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-50  bg-opacity-90 flex flex-col items-center justify-center min-h-screen bg-zinc-900">

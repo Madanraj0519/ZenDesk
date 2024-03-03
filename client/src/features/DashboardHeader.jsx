@@ -18,7 +18,6 @@ function DashboardHeader({ showSidebar, handleToggleSidebar }) {
   const handleUserSignOut = async() => {
     try{
       await fetch('/api/auth/signout');
-      // localStorage.removeItem('token');
       dispatch(signOut());
       toast.warning("Singed out")
     }catch(err){
