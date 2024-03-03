@@ -17,8 +17,8 @@ const VerifyEmail = () => {
 
   const emailToken = searchParams.get("emailToken")
   
-  console.log(currentUser);
-  console.log("emailToken:", emailToken);
+  // console.log(currentUser);
+  // console.log("emailToken:", emailToken);
 
   useEffect(() => {
     ( async () => {
@@ -62,15 +62,15 @@ const VerifyEmail = () => {
              Loading
           </div>
         ) : (
-          <div>
+          <div className='flex justify-center items-center min-h-screen bg-black bg-transparent opacity-75'>
             {
               currentUser.isVerified ? (
                 <div>
-                  Email successfully verified, redirecting....
+                  <h1 className='text-green-500 text-2xl'>Email successfully verified, redirecting....</h1>
                 </div>
               ) : (
                 <div>
-                  {error ? error : "Something is have to display but it is null not"}
+                  <h1 className='text-white text-2xl'>{error ? error : "Something is have to display but it is null now"}</h1>
                 </div>
               )
             }
