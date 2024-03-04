@@ -46,12 +46,12 @@ const EmployeeTicket = () => {
     <div className='flex justify-between items-center'>
        <div>
          <h1 className='text-2xl font-semibold'>Ticket List</h1>
-         <h2 className='text-zinc-600'>Dashboard/Tickets belongs to {currentEmployee.restDetails.userName}</h2>
+         <h2 className='text-zinc-600'>Dashboard/Tickets belongs to {currentEmployee.restDetails.employeeName}</h2>
       </div>
       <div className=' relative flex gap-2'>
         {
           showInfo && ( <p className='border-2 absolute right-7 top-2 border-zinc-200 px-4 p-2 w-72 bg-green-600 rounded-md opacity-100 
-          text-zinc-100'>This filed shows the tickets that belong to the {currentEmployee.restDetails.userName}, if it not there, 
+          text-zinc-100'>This filed shows the tickets that belong to the {currentEmployee.restDetails.employeeName}, if it not there, 
           then <Link to={'/create-ticket'}><span className='underline cursor-pointer'>create</span></Link> a custom tickets with the company name (or) ask your admin to assign tickets to you</p>)
         }
         <IoMdInformationCircle className='text-2xl text-green-600 cursor-pointer' onClick={() => setShowInfo(!showInfo)} />

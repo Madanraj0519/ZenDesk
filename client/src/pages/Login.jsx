@@ -6,7 +6,10 @@ import Zendesk from "../images/Zendesk-Symbol.png";
 const login = () => {
   return (
     <div className='max-w-7xl mx-auto'>
+        <div className='flex justify-between items-center'>
         <img className='w-32 h-32 mx-20 object-contain' src={Zendesk} />
+        <Link to={'/create-ticket'}><h4 className='mt-16 mr-10 text-base text-zinc-700 px-2 bg-zinc-300 p-1 rounded-lg bg-opacity-40'>Create custom tickets</h4></Link>
+        </div>
         <div className='md:flex justify-between gap-5 items-start py-5 md:mx-20 shadow-lg'>
             <div className='mx-8 max-w-5xl'>
                 <h1 className='text-4xl text-emerald-900 font-serif font-semibold whitespace-nowrap'>Sign in to Zendesk</h1>

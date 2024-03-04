@@ -30,7 +30,7 @@ const AssignEmployee = ({ticketId, isAssigned}) => {
       if(data.success === false){
         toast.error(data.message);
       }else{
-        toast.success(data);
+        toast.success(data.message);
         setTimeout(() => { window.location.reload()}, 2000);
       }
      }catch(err){
@@ -51,7 +51,7 @@ const AssignEmployee = ({ticketId, isAssigned}) => {
       if(data.success === false){
         toast.error(data.message);
       }else{
-        toast.success(data);
+        toast.success(data.message);
         setTimeout(() => { window.location.reload()}, 2000);
       }
     }catch(err){
