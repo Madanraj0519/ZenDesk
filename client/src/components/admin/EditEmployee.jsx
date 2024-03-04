@@ -45,7 +45,7 @@ const EditEmployee = ({setShowUpdate, defaultData}) => {
         toast.error(data.message);
       }else{
         toast.warning(data.message);
-      setTimeout(() => {window.location.reload()}, 3000);
+      setTimeout(() => {window.location.reload()}, 2000);
       }
     }catch(err){
       toast.error(err.message);
@@ -185,11 +185,11 @@ className="bg-zinc-50 shadow-md shadow-gray-700 rounded px-8 pt-6 pb-8 mb-4 max-
      text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
     type="submit"> Update
   </button>
-  <button  className="bg-red-800 mt-8 mb-3 hover:scale-110 duration-200
-    hover:bg-red-700 text-white font-bold py-3 px-6 rounded focus:outline-none 
-    focus:shadow-outline" onClick={() => handleDelete(defaultData._id)}>Delete account</button>
 </div>
 </form>
+   <button  className="bg-red-800 mt-8 mb-3 hover:scale-110 duration-200
+    hover:bg-red-700 text-white font-bold py-3 px-6 rounded focus:outline-none 
+    focus:shadow-outline" onClick={() => handleDelete(defaultData._id)}>Delete account</button>
     </div>
     </div>
   )

@@ -5,6 +5,7 @@ const errorHandler = require('../utils/errorHandler');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const path = require('path');
+const ticketModel = require('../model/ticket.model');
 
 
 const createToken = (_id) => {
@@ -149,6 +150,15 @@ const updateEmployee = async(req, res, next) => {
 const deleteEmployee = async(req, res, next) => {
     
     try{
+        const ticket =  await ticketModel.find({ "assignedTo" : req.params.id});
+        console.log(ticket[0]._id);
+        await ticketModel.findByIdAndUpdate(
+            ticket[0]._id,
+            {
+                assignedTo : null,
+                isAssigned : false,
+            },
+        );
         await employeeModel.findByIdAndDelete(req.params.id);
         res.status(200).
         json({

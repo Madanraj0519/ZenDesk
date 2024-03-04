@@ -52,7 +52,7 @@ const EmployeeList = () => {
       <div className=' relative flex gap-2'>
         {
           showInfo && ( <p className='border-2 absolute right-7 top-2 border-zinc-200 px-4 p-2 w-64 bg-green-600 rounded-md opacity-100 
-          text-zinc-100 bg-transparent'>This filed show the employee lists, If it has a no employees then add new employees</p>)
+          text-zinc-100'>This filed show the employee lists, If it has a no employees then add new employees</p>)
         }
         <IoMdInformationCircle className='text-2xl text-green-600 cursor-pointer' onClick={() => setShowInfo(!showInfo)} />
        </div>

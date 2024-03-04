@@ -7,12 +7,12 @@ function sendEmail(user){
         var transporter = nodemailer.createTransport(smtpTransport({
            service:"gmail",
             auth: {
-                user: "madanswetha10@gmail.com",       // Sender mail id
-                pass: "npvtzeoazvypjdtm"                 // Sender password
+                user: process.env.EMAIL_USERNAME,       // Sender mail id
+                pass: process.env.EMAIL_PASSWORD,                 // Sender password
             }
             }));
         let mailOptions = {
-            from: `Fred Foo 👻" <madanswetha10@gmail.com>`,        // Sender mail id
+            from: `ZenDesk-Clone Verification Mail 📧" <${process.env.EMAIL_USERNAME}>`,        // Sender mail id
             to: user.userEmail,                // Reciever mail id (For multiple recievers to:'abc@gmail.com,xyz@gmail.com')
             subject : "Verify your email...",
             html : `
