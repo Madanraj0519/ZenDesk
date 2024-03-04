@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const { authRoute } = require('./route/auth.route');
@@ -10,10 +9,18 @@ const { userRoute } = require('./route/user.route');
 const cookieParser = require('cookie-parser');
 const { employeeRoute } = require('./route/employee.route');
 const { ticketRoute } = require('./route/ticket.route');
-
+const path = require('path');
 dotenv.config();
 
+// const __dirname = path.resolve();
+
 const PORT = 3000;
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'))
+});
 
 app.use(express.json());
 app.use(cookieParser());

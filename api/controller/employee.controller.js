@@ -151,7 +151,6 @@ const deleteEmployee = async(req, res, next) => {
     
     try{
         const ticket =  await ticketModel.find({ "assignedTo" : req.params.id});
-        console.log(ticket[0]._id);
         await ticketModel.findByIdAndUpdate(
             ticket[0]._id,
             {
