@@ -52,12 +52,16 @@ const deleteUser = async(req, res, next) => {
     try{
         
         const employee = await employeeModel.find({ "createdBy._id" : req.params.id });
-        console.log("employee", employee[0]._id);
-        await employeeModel.findByIdAndDelete({ _id: employee[0]._id});
-
+        
+        if(employee.length > 0){
+            await employeeModel.findByIdAndDelete({ _id: employee[0]._id});
+        }
+        
         const ticket = await ticketModel.find( { "belongToAdmin._id" : req.params.id });
-        console.log("ticket", ticket[0]._id);
-        await ticketModel.findByIdAndDelete({_id: ticket[0]._id});
+        if(ticket.length > 0) {
+            await ticketModel.findByIdAndDelete({_id: ticket[0]._id});
+        }
+        
 
         await userModel.findByIdAndDelete(req.params.id);
 

@@ -151,18 +151,22 @@ const deleteEmployee = async(req, res, next) => {
     
     try{
         const ticket =  await ticketModel.find({ "assignedTo" : req.params.id});
-        await ticketModel.findByIdAndUpdate(
-            ticket[0]._id,
-            {
-                assignedTo : null,
-                isAssigned : false,
-            },
-        );
+
+        if(ticket.length > 0){
+            await ticketModel.findByIdAndUpdate(
+                ticket[0]._id,
+                {
+                    assignedTo : null,
+                    isAssigned : false,
+                },
+            );
+        }
+
         await employeeModel.findByIdAndDelete(req.params.id);
         res.status(200).
         json({
             success : true,
-            message : "Your account has been deleted successfully",
+            message : "Employee account has been deleted successfully",
         })
     }catch(err){
         next(err);

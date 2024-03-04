@@ -49,13 +49,13 @@ const AssignEmployee = ({ticketId, isAssigned}) => {
       });
       const data = await res.json();
       if(data.success === false){
-        console.log(data.message);
+        toast.error(data.message);
+      }else{
+        toast.success(data);
+        setTimeout(() => { window.location.reload()}, 2000);
       }
-      console.log(data);
-      setTimeout(() => { window.location.reload()}, 2000);
-
     }catch(err){
-      console.log(err);
+      console.log("Something went wrong");
     }
   };
 

@@ -16,7 +16,7 @@ const PORT = 3000;
 
 const ___dirname = path.resolve();
 
-console.log(___dirname);
+// console.log(___dirname);
 
 app.use(express.json());
 app.use(cookieParser());

@@ -17,7 +17,7 @@ function sendEmail(user){
             subject : "Verify your email...",
             html : `
                  <p>Hello 🙋‍♂️ ${user.userName}, verify your email by clicking this link...</p>
-                 <a href='http://localhost:5173/verify-email?emailToken=${user.emailToken}'>Verify Your Email</a>
+                 <a href='https://zendesk-clone.onrender.com/verify-email?emailToken=${user.emailToken}'>Verify Your Email</a>
                 `, 
         };
   
