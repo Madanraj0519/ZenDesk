@@ -1,0 +1,1 @@
+This Projects revolves around the clone of Zen-desk. In this project I have created a simple CRM (Customer Relational  Management) application. Where we can a create our account and also create our employees to solve the tickets raised by the customers.
