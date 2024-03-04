@@ -20,9 +20,9 @@ const PORT = 3000;
 
 app.use(express.static(path.join(___dirname, '/client/dist')));
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(___dirname, 'client', 'dist', 'index.html'))
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(___dirname, 'client', 'dist', 'index.html'))
+});
 
 app.use(express.json());
 app.use(cookieParser());
