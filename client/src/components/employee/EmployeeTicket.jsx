@@ -4,6 +4,7 @@ import { MdOutlineViewInAr } from "react-icons/md";
 import ResolvedQuery from './ResolvedQuery';
 import {useSelector} from "react-redux"
 import { IoMdInformationCircle } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 const EmployeeTicket = () => {
 

@@ -68,7 +68,7 @@ const EmployeeProfile = () => {
         </div>
         <div>
           <h1 className='text-xl font-medium text-gray-500 mb-3'>Personal Information</h1>
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-8 ml-10">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-8 md:ml-10">
           {/* <!-- Username field --> */}
           <div className="md:flex justify-end items-center gap-4">
             <label
