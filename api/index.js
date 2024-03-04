@@ -12,17 +12,11 @@ const { ticketRoute } = require('./route/ticket.route');
 const path = require('path');
 dotenv.config();
 
+const PORT = 3000;
+
 const ___dirname = path.resolve();
 
 console.log(___dirname);
-
-const PORT = 3000;
-
-app.use(express.static(path.join(___dirname, '/client/dist')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(___dirname, 'client', 'dist', 'index.html'))
-});
 
 app.use(express.json());
 app.use(cookieParser());
@@ -39,6 +33,12 @@ app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
 app.use('/api/employee', employeeRoute);
 app.use('/api/ticket', ticketRoute);
+
+app.use(express.static(path.join(___dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(___dirname, 'client', 'dist', 'index.html'))
+});
 
 app.listen(PORT, () => {
     console.log(`Listening on port, http://localhost:${PORT} `);
