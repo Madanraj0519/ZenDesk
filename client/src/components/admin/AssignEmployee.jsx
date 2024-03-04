@@ -31,7 +31,7 @@ const AssignEmployee = ({ticketId, isAssigned}) => {
         toast.error(data.message);
       }else{
         toast.success(data);
-        setTimeout(() => { window.location.reload()}, 3000);
+        setTimeout(() => { window.location.reload()}, 2000);
       }
      }catch(err){
       toast.error("Something went wrong");

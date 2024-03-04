@@ -22,7 +22,7 @@ const ResolvedQuery = ({defaultData, setIsShow}) => {
             if(data.success === false){
                 toast.error(data);
             }else{
-              setTimeout(() => { window.location.reload();}, 3000)
+              setTimeout(() => { window.location.reload();}, 2000)
               toast.success(data);
             }
         }catch(err){

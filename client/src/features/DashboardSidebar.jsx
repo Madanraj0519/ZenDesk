@@ -16,7 +16,7 @@ function DashboardSidebar({handleToggleSidebar}) {
 
   const Admin = currentUser ? [
     {
-      Name: "Admin Dashboard",
+      Name: "Employee List",
       links: "/dashboard/admin",
       child: (
         <>

@@ -29,7 +29,7 @@ const AddEmployee = ({setIsShow}) => {
         toast.error(data.message);
         }else{
           toast.success(data.message);
-          setTimeout(() => {window.location.reload()}, 3000);
+          setTimeout(() => {window.location.reload()}, 2000);
         }
       }catch(err){
         toast.error("Something went wrong");

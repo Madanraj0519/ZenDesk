@@ -29,7 +29,7 @@ const EditEmployee = ({setShowUpdate, defaultData}) => {
        toast.error(data.message);
       }
       toast.success(data.message);
-      setTimeout(() => {window.location.reload()}, 3000);
+      setTimeout(() => {window.location.reload()}, 2000);
     }catch(e){
       toast.error("Something went wrong");
     };
