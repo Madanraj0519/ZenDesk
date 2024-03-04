@@ -12,15 +12,17 @@ const { ticketRoute } = require('./route/ticket.route');
 const path = require('path');
 dotenv.config();
 
-const _dirname = path.resolve();
+const ___dirname = path.resolve();
+
+console.log(___dirname);
 
 const PORT = 3000;
 
-app.use(express.static(path.join(_dirname, '/client/dist')));
+app.use(express.static(path.join(___dirname, '/client/dist')));
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(_dirname, 'client', 'dist', 'index.html'))
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(___dirname, 'client', 'dist', 'index.html'))
+// });
 
 app.use(express.json());
 app.use(cookieParser());
