@@ -21,7 +21,7 @@ function DashboardHeader({ showSidebar, handleToggleSidebar }) {
       dispatch(signOut());
       toast.warning("Singed out")
     }catch(err){
-      console.log(err);
+      toast.error(err.message);
     }
   };
 
@@ -31,7 +31,7 @@ function DashboardHeader({ showSidebar, handleToggleSidebar }) {
       dispatch(employeeSignOut());
       toast.warning("Singed out")
     }catch(err){
-      console.log(err);
+      toast.error(err.message);
     }
   };
 
@@ -53,20 +53,17 @@ function DashboardHeader({ showSidebar, handleToggleSidebar }) {
       </div>
 
       {
-        currentUser && (
+        currentUser ? (
           <div className="text-4xl text-zinc-100 cursor-pointer" onClick={handleUserSignOut}>
             <IoLogInOutline />
           </div>
-        )
-      }
-
-     {
-        currentEmployee && (
+        ) : (
           <div className="text-4xl text-zinc-100 cursor-pointer" onClick={handleEmployeeSignOut}>
             <IoLogInOutline />
           </div>
         )
       }
+      
     </header>
   );
 }

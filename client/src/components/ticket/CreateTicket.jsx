@@ -66,7 +66,7 @@ const CreateTicket = () => {
               class="block text-zinc-600 text-sm font-bold mb-3"
               for="username"
             >
-              Select Product
+              Select Company
             </label>
             <select value={selectedValue} className='border-transparent border-2 w-full focus:border-green-500 bg-zinc-200 text-gray-900 border-gray-200 px-2 
                 py-1 rounded-lg focus:outline-none focus:shadow-outline' onChange={(e) => setSelectedValue(e.target.value)}>

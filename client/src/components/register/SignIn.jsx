@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { signInStart, signInSuccess, signInFailure } from '../../redux/auth/userSlice';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +10,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {loading, error} = useSelector( state => state.user);
+  const [eyeOpen, setEyeOpen] = useState(false);
   const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
@@ -55,13 +57,20 @@ const SignIn = () => {
                 onChange={handleChange}
                 className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
                  />
-                 <input
-                type="password"
-                placeholder="Enter your password"
-                id='userPassword'
-                onChange={handleChange}
-                className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
-                 />
+                 <div className='flex relative'>
+                     <input
+                     type={eyeOpen ? "text" : "password"}
+                     placeholder="Create a password"
+                     id='userPassword'
+                     onChange={handleChange}
+                     className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
+                      />
+                      <div
+                      onClick={() => setEyeOpen(!eyeOpen)}
+                      className="absolute right-0 mr-3 cursor-pointer text-zinc-500 text-2xl mt-4">
+                        {eyeOpen ? <BsEyeFill /> : <BsEyeSlashFill />}
+                      </div>
+                 </div>
                  <div className='flex justify-between items-start gap-4 bg-gray-100 p-4' >
                     <h1 className='text-emerald-700'>Use your work email to smoothly connect customer emails and existing apps, and also invite team members.</h1>
                  </div>
@@ -69,7 +78,6 @@ const SignIn = () => {
 
             <div className='text-center w-full mt-4'>
               <button className='bg-emerald-900 w-full p-3 font-medium text-xl text-white' type='submit'>Next</button>
-              <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter</span></p>
             </div>
         </form>
            <h1 className='text-sm font-poppins text-emerald-700 mt-5'>By submitting my personal data, I consent to Zendesk collecting, 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {BsEyeSlash, BsEye} from "react-icons/bs";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { IoIosInformationCircle } from "react-icons/io";
 import { PiArrowElbowDownLeftBold } from "react-icons/pi";
 import {signInStart, signInSuccess, signInFailure} from "../../redux/auth/userSlice"
@@ -12,10 +12,8 @@ const SignUp = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { currentUser, loading, error} = useSelector((state) => state.user);
 
-    console.log(currentUser);
-
+    const [eyeOpen, setEyeOpen] = useState(false);
     const [formData, setFormData] = useState({});
     // These are the animation part for the sign up form
     const [progress, setProgress] = useState(14.2);
@@ -54,7 +52,6 @@ const SignUp = () => {
         toast.info(data.message);
 
       }catch(err){
-        console.log(err);
         toast.error("Something went wrong");
       }
     }
@@ -146,7 +143,6 @@ const SignUp = () => {
 
             <div className='text-center w-full mt-4'>
               <button className='bg-emerald-900 w-full p-3 font-medium text-xl text-white' onClick={() => handleStepOne(true)}>Next</button>
-              <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter<PiArrowElbowDownLeftBold /></span></p>
             </div>
             </>
            }
@@ -168,7 +164,6 @@ const SignUp = () => {
                  <button className='text-emerald-900 w-full p-2 font-medium text-xl border-2 border-emerald-900' onClick={() => handleStepOne(false)}>Back</button>
                  <button className='bg-emerald-900 w-full p-2 font-medium text-xl text-white' onClick={() => handleStepTwo(true)}>Next</button>
                </div>
-              <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter<PiArrowElbowDownLeftBold /></span></p>
             </div>
         </div>
            }
@@ -190,7 +185,6 @@ const SignUp = () => {
                  <button className='text-emerald-900 w-full p-2 font-medium text-xl border-2 border-emerald-900' onClick={() => handleStepTwo(false)}>Back</button>
                  <button className='bg-emerald-900 w-full p-2 font-medium text-xl text-white' onClick={() => handleStepThree(true)}>Next</button>
                </div>
-              <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter<PiArrowElbowDownLeftBold /></span></p>
             </div>
          </div>
          }
@@ -212,7 +206,6 @@ const SignUp = () => {
                  <button className='text-emerald-900 w-full p-2 font-medium text-xl border-2 border-emerald-900' onClick={() => handleStepThree(false)}>Back</button>
                  <button className='bg-emerald-900 w-full p-2 font-medium text-xl text-white' onClick={() => handleStepFour(true)}>Next</button>
                </div>
-              <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter<PiArrowElbowDownLeftBold /></span></p>
             </div>
           </div>
          }
@@ -235,7 +228,6 @@ const SignUp = () => {
                  <button className='text-emerald-900 w-full p-2 font-medium text-xl border-2 border-emerald-900' onClick={() => handleStepFour(false)}>Back</button>
                  <button className='bg-emerald-900 w-full p-2 font-medium text-xl text-white' onClick={() =>  handleStepFive(true)}>Next</button>
                </div>
-              <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter<PiArrowElbowDownLeftBold /></span></p>
             </div>
           </div>
          }
@@ -257,7 +249,6 @@ const SignUp = () => {
                  <button className='text-emerald-900 w-full p-2 font-medium text-xl border-2 border-emerald-900' onClick={() => handleStepFive(false)}>Back</button>
                  <button className='bg-emerald-900 w-full p-2 font-medium text-xl text-white' onClick={() => handleStepSix(true)}>Next</button>
                </div>
-              <p className='mt-2 text-emerald-700 flex gap-2 justify-end text-lg'>or Press <span className='font-medium text-emerald-900 flex'>Enter<PiArrowElbowDownLeftBold /></span></p>
             </div>
              </div>
          }
@@ -268,13 +259,20 @@ const SignUp = () => {
             stepSeven &&
              <div className="mt-6">
              <h1 className='text-base font-medium font-poppins text-emerald-900'>Lastly, create a password:</h1>
+             <div className='flex relative'>
              <input
-             type="password"
+             type={eyeOpen ? "text" : "password"}
              placeholder="Create a password"
              id='userPassword'
              onChange={handleChange}
              className="border mt-2 border-gray-300 px-4 py-2 w-full mb-4 outline-emerald-900"
               />
+              <div
+              onClick={() => setEyeOpen(!eyeOpen)}
+              className="absolute right-0 mr-3 cursor-pointer text-zinc-500 text-2xl mt-4">
+                {eyeOpen ? <BsEyeFill /> : <BsEyeSlashFill />}
+              </div>
+             </div>
              <div className='text-center w-full mt-4'>
                <div className='flex gap-5'>
                  <button className='text-emerald-900 w-full p-2 font-medium text-xl border-2 border-emerald-900' onClick={() => handleStepSix(false)}>Back</button>

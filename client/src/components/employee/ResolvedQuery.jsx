@@ -33,7 +33,7 @@ const ResolvedQuery = ({defaultData, setIsShow}) => {
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-50  bg-opacity-90 flex flex-col items-center justify-center min-h-screen bg-zinc-900">
-    <div className="relative lg:w-3/5 h-700 rounded-xl shadow-md p-8">
+    <div className="relative lg:w-3/5 h-700 rounded-xl shadow-md p-8 overflow-y-scroll md:overflow-y-hidden">
         <button
           className="absolute top-0 right-0 mt-4 mr-4 rounded-full p-2 bg-gray-800 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600"
           onClick={() => setIsShow(false)}
