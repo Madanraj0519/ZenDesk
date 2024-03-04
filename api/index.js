@@ -12,13 +12,14 @@ const { ticketRoute } = require('./route/ticket.route');
 const path = require('path');
 dotenv.config();
 
+const _dirname = path.resolve();
 
 const PORT = 3000;
 
-app.use(express.static(path.join(__dirname, '/client/dist')));
+app.use(express.static(path.join(_dirname, '/client/dist')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'))
+    res.sendFile(path.join(_dirname, 'client', 'dist', 'index.html'))
 });
 
 app.use(express.json());
