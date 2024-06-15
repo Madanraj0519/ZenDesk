@@ -36,8 +36,8 @@ const Header = () => {
       }
 
   return (
-    <div className='bg-orange-50 w-full sticky mt-5 h-20 border-b-2 border-b-zinc-400'>
-        <div className='flex justify-between items-center max-w-5xl mx-auto'>
+    <div className='bg-orange-50 w-full sticky h-20 border-b-2 border-b-zinc-400 mx-4 '>
+        <div className='flex justify-between items-center max-w-5xl mx-auto pt-2'>
             <div className='flex-col'>
                 <img src={zenLogo} className='w-12 h-8 hidden md:block' />
                 <h1 className='text-2xl font-medium md:-ml-5 font-poppins'>Zen desk</h1>
@@ -57,7 +57,6 @@ const Header = () => {
             </Link>
             <div onClick={toggleShowMode} 
                    className='flex  justify-between gap-5 cursor-pointer pr-4 z-10 text-zinc-900 md:hidden'>
-            <h1 className='text-base font-medium'>Contact us</h1>
             {
             showMode ? <FaTimes size={30} /> : <FaBars size={30}/>
             }

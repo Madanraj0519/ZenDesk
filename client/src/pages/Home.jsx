@@ -5,7 +5,7 @@ import Hero from '../components/home/Hero';
 
 const Home = () => {
   return (
-    <div className='bg-show-background'>
+    <div className='bg-show-background h-screen w-full'>
       <Header />
       <Hero />
     </div>
