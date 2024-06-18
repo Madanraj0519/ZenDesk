@@ -5,6 +5,8 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { signInStart, signInSuccess, signInFailure } from '../../redux/auth/userSlice';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { IoMdInformationCircle } from "react-icons/io";
+import { MdCancel } from "react-icons/md";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ const SignIn = () => {
   const {loading, error} = useSelector( state => state.user);
   const [eyeOpen, setEyeOpen] = useState(false);
   const [formData, setFormData] = useState({});
+  const [showInfo, setShowInfo] = useState(true);
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.id] : e.target.value });
@@ -46,7 +49,25 @@ const SignIn = () => {
 
   return (
     <div className="absolute top-0 flex justify-center items-center bg-color h-full w-full">
-          <div className="fixed md:3/4 lg:w-2/5 h-484 border border-gray-300 shadow-md p-6 bg-white px-12 mt-2">
+      <div className="fixed md:3/4 lg:w-2/5 h-484 border border-gray-300 shadow-md p-6 bg-white px-12 mt-2">
+         {
+          showInfo ? ( <MdCancel onClick={() => setShowInfo(!showInfo)} className='absolute 
+          right-5 top-0 cursor-pointer mt-2 text-gray-600 text-xl' /> ) : (
+            <IoMdInformationCircle onClick={() => setShowInfo(!showInfo)} className='absolute 
+         right-5 top-0 cursor-pointer mt-2 text-gray-600 text-xl' />
+          )
+         }
+         {
+          showInfo && (
+          <div className='absolute mt-2 right-5 bg-green-600 rounded-md text-white p-2  md:w-72'>
+            <h4 className='capitalize text-center mb-1.5'>demo credentials to login</h4>
+            <div className='text-center text-base whitespace-nowrap'>
+              <p>Email : madan__raj@hotmail.com</p>
+              <p>Password : madan</p>
+            </div>
+           </div>
+          )
+         }
         <form onSubmit={handleSubmit}>
             <div className="mt-6">
                 <h1 className='text-base font-medium font-poppins text-emerald-900'>Let us start with your work email</h1>
